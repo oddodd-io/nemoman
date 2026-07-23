@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[시안 A] 네모맨 철거 · 다크 프리미엄</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --blue:#4E6BE8; --blue-bright:#6E86FF; --yellow:#F5B301; --yellow-soft:#FFCB45;
+  --bg:#0B0E24; --bg-2:#11152F; --panel:rgba(255,255,255,.04); --line:rgba(255,255,255,.09);
+  --tx:#EDEFFA; --tx-2:#A6ABC9; --tx-3:#6B7098;
+  --font:'Pretendard','Pretendard Variable',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--tx);line-height:1.6;
+  -webkit-font-smoothing:antialiased;letter-spacing:-.01em;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+h1,h2,h3{margin:0;line-height:1.1;letter-spacing:-.035em;font-weight:900;font-optical-sizing:auto}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+
+/* ambient glow bg */
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+   radial-gradient(760px 520px at 82% -6%, rgba(78,107,232,.30), transparent 62%),
+   radial-gradient(680px 460px at 4% 108%, rgba(245,179,1,.12), transparent 60%),
+   radial-gradient(900px 700px at 50% 40%, rgba(110,134,255,.06), transparent 70%)}
+
+/* header */
+.hd{position:sticky;top:0;z-index:50;backdrop-filter:blur(22px) saturate(160%);
+  -webkit-backdrop-filter:blur(22px) saturate(160%);background:rgba(11,14,36,.55);
+  border-bottom:1px solid var(--line)}
+.hd .wrap{display:flex;align-items:center;gap:22px;height:74px}
+.brand{display:flex;align-items:center;gap:11px}
+.bmark{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex:none;
+  background:linear-gradient(150deg,var(--blue),var(--blue-bright));
+  box-shadow:0 8px 26px rgba(78,107,232,.5)}
+.bname b{font-size:1.15rem;font-weight:900;display:block;line-height:1.05}
+.bname small{font-size:.66rem;color:var(--tx-3);font-weight:700;letter-spacing:.08em}
+.nav{display:flex;gap:6px;margin-left:14px}
+.nav a{padding:9px 14px;border-radius:11px;color:var(--tx-2);font-weight:600;font-size:.95rem;transition:.2s}
+.nav a:hover{color:var(--tx);background:var(--panel)}
+.hd-act{margin-left:auto;display:flex;align-items:center;gap:14px}
+.tel{font-weight:800;color:var(--tx);display:inline-flex;gap:7px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;
+  border-radius:999px;font-weight:800;font-size:1rem;white-space:nowrap;cursor:pointer;
+  transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .2s,background .2s}
+.btn:active{transform:scale(.97);transition-duration:.1s}
+.btn-p{background:linear-gradient(150deg,var(--blue),var(--blue-bright));color:#fff;
+  box-shadow:0 10px 30px rgba(78,107,232,.45)}
+.btn-p:hover{box-shadow:0 14px 40px rgba(78,107,232,.6)}
+.btn-y{background:linear-gradient(150deg,var(--yellow),var(--yellow-soft));color:#151022;
+  box-shadow:0 10px 30px rgba(245,179,1,.35)}
+.btn-glass{background:var(--panel);color:var(--tx);border:1px solid var(--line)}
+.btn-glass:hover{background:rgba(255,255,255,.08)}
+.btn-lg{padding:17px 32px;font-size:1.06rem}
+.hamb{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);
+  background:var(--panel)}
+.hamb span{display:block;width:20px;height:2px;background:var(--tx);margin:4px auto;border-radius:2px}
+
+/* hero */
+.hero{position:relative;padding:70px 0 90px}
+.hero .wrap{display:grid;grid-template-columns:1.06fr .94fr;gap:44px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:800;
+  color:var(--blue-bright);background:rgba(78,107,232,.12);border:1px solid rgba(78,107,232,.28);
+  padding:7px 14px;border-radius:999px}
+.hero h1{font-size:clamp(2.3rem,5.4vw,3.7rem);margin:20px 0 0;line-height:1.08}
+.hero h1 .g{background:linear-gradient(120deg,var(--blue-bright),var(--yellow-soft));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.slogan{display:inline-block;margin-top:18px;font-weight:800;color:var(--yellow-soft);font-size:1.05rem}
+.hero .sub{margin-top:18px;color:var(--tx-2);font-size:1.1rem;max-width:520px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:13px;margin-top:30px}
+.trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:28px;color:var(--tx-2);font-size:.92rem;font-weight:600}
+.trust b{color:var(--tx)}
+.trust .d{color:var(--blue-bright)}
+.hero-vis{position:relative;display:grid;place-items:center}
+.ring{position:absolute;width:96%;aspect-ratio:1;border-radius:50%;
+  background:conic-gradient(from 140deg,rgba(78,107,232,.5),rgba(245,179,1,.35),rgba(78,107,232,.5));
+  filter:blur(46px);opacity:.55;animation:spin 18s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-vis img{position:relative;width:min(420px,100%);filter:drop-shadow(0 30px 40px rgba(0,0,0,.5))}
+.chip{position:absolute;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  background:rgba(20,24,54,.66);border:1px solid var(--line);border-radius:16px;
+  padding:12px 15px;font-weight:800;font-size:.9rem;box-shadow:0 14px 40px rgba(0,0,0,.4)}
+.chip-1{right:-2%;top:14%;display:flex;gap:9px;align-items:center}
+.chip-1 .big{color:var(--yellow-soft);font-size:1.05rem}
+.chip-2{left:-4%;bottom:14%;color:var(--tx)}
+.chip-2 b{color:var(--blue-bright)}
+
+/* section shell */
+.sec{padding:96px 0}
+.sec-head{max-width:680px;margin:0 auto 52px;text-align:center}
+.sec-head h2{font-size:clamp(1.7rem,3.6vw,2.6rem);margin-top:16px}
+.sec-head p{color:var(--tx-2);margin-top:14px;font-size:1.05rem}
+
+/* glass cards */
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.glass{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:28px 24px;
+  transition:transform .25s cubic-bezier(.2,.8,.2,1),border-color .25s,background .25s;position:relative;overflow:hidden}
+.glass::before{content:"";position:absolute;inset:0;border-radius:20px;padding:1px;pointer-events:none;
+  background:linear-gradient(160deg,rgba(255,255,255,.14),transparent 40%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:.25s}
+.glass:hover{transform:translateY(-6px);border-color:rgba(110,134,255,.4);background:rgba(255,255,255,.06)}
+.glass:hover::before{opacity:1}
+.ic{width:54px;height:54px;border-radius:15px;display:grid;place-items:center;font-size:1.55rem;
+  background:linear-gradient(150deg,rgba(78,107,232,.25),rgba(78,107,232,.08));
+  border:1px solid rgba(110,134,255,.25);margin-bottom:16px}
+.glass h3{font-size:1.14rem;letter-spacing:-.02em}
+.glass p{margin-top:9px;color:var(--tx-2);font-size:.95rem}
+
+/* gov highlight */
+.gov .wrap{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center;
+  background:linear-gradient(150deg,rgba(78,107,232,.16),rgba(245,179,1,.05));
+  border:1px solid var(--line);border-radius:30px;padding:52px 44px}
+.gov h2{font-size:clamp(1.8rem,3.8vw,2.7rem);margin-top:14px}
+.gov h2 .amt{color:var(--yellow-soft)}
+.gov p{margin-top:16px;color:var(--tx-2);max-width:560px}
+.gov-cta{margin-top:28px;display:flex;gap:13px;flex-wrap:wrap}
+.gov .note{margin-top:18px;font-size:.8rem;color:var(--tx-3)}
+.gov-vis{display:grid;place-items:center}
+.gov-vis img{width:210px;filter:drop-shadow(0 20px 30px rgba(0,0,0,.5))}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:28px 24px}
+.snum{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;font-weight:900;
+  font-size:1.15rem;color:#fff;background:linear-gradient(150deg,var(--blue),var(--blue-bright));
+  box-shadow:0 8px 22px rgba(78,107,232,.4);margin-bottom:16px}
+.step h3{font-size:1.1rem;letter-spacing:-.02em}
+.step p{margin-top:8px;color:var(--tx-2);font-size:.93rem}
+
+/* faq */
+.faq-list{max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.faq-item{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.faq-q{width:100%;text-align:left;display:flex;justify-content:space-between;gap:16px;align-items:center;
+  padding:21px 24px;font-weight:800;font-size:1.03rem;color:var(--tx);cursor:pointer;
+  background:none;border:none;font-family:inherit}
+.faq-q .qic{flex:none;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;
+  background:rgba(78,107,232,.18);color:var(--blue-bright);font-size:1.15rem;transition:transform .25s}
+.faq-item.open .qic{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-a p{padding:0 24px 22px;color:var(--tx-2)}
+
+/* final */
+.final .wrap{text-align:center;background:linear-gradient(150deg,rgba(78,107,232,.22),rgba(78,107,232,.06));
+  border:1px solid var(--line);border-radius:32px;padding:64px 40px;position:relative;overflow:hidden}
+.final h2{font-size:clamp(1.8rem,4vw,2.7rem)}
+.final p{margin-top:14px;color:var(--tx-2)}
+.final .cta{margin-top:30px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* footer */
+.ft{border-top:1px solid var(--line);padding:56px 0 34px;color:var(--tx-2)}
+.ft .wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px}
+.ft h4{color:var(--tx);font-size:.95rem;margin-bottom:14px}
+.ft-links a{display:block;padding:5px 0;color:var(--tx-2);font-size:.92rem}
+.ft-links a:hover{color:var(--tx)}
+.ft-info{font-size:.86rem;line-height:1.9;color:var(--tx-3)}
+.ft-info .ph{color:var(--tx);font-weight:800;font-size:1.05rem}
+.ft-bot{border-top:1px solid var(--line);margin-top:36px;padding-top:22px;display:flex;
+  justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.82rem;color:var(--tx-3)}
+
+.tag{position:fixed;left:14px;bottom:14px;z-index:99;background:var(--yellow);color:#151022;
+  font-weight:900;font-size:.78rem;padding:8px 14px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+
+@media (max-width:960px){
+  .nav,.hd-act .tel{display:none}
+  .hamb{display:block}
+  .hero .wrap{grid-template-columns:1fr;text-align:center}
+  .hero .sub{margin:18px auto 0}
+  .hero-cta,.trust{justify-content:center}
+  .hero-vis{order:-1}
+  .gov .wrap{grid-template-columns:1fr;text-align:center;padding:40px 26px}
+  .gov p{margin:16px auto 0}.gov-cta{justify-content:center}.gov-vis{display:none}
+  .grid-4,.steps{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .sec{padding:64px 0}
+  .grid-4,.steps{grid-template-columns:1fr}
+  .ft .wrap{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .ring{animation:none}
+}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="wrap">
+    <a href="#" class="brand">
+      <span class="bmark"><svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <rect x="3.2" y="3.2" width="13" height="13" rx="3" stroke="#fff" stroke-width="2.4"/>
+        <rect x="9" y="9" width="11.5" height="11.5" rx="3" fill="#fff"/></svg></span>
+      <span class="bname"><b>네모맨 철거</b><small>공간 f5</small></span>
+    </a>
+    <nav class="nav">
+      <a href="#gov">정부지원·비용</a><a href="#svc">서비스</a><a href="#proc">진행절차</a><a href="#faq">FAQ</a>
+    </nav>
+    <div class="hd-act">
+      <a href="tel:15330000" class="tel">☎ 1533-0000</a>
+      <a href="#contact" class="btn btn-p">견적 문의</a>
+      <button class="hamb" aria-label="메뉴"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">🏛️ 소상공인 정부지원 연계 철거</span>
+      <h1>막막한 폐업 철거,<br><span class="g">네모맨</span>이 끝냅니다</h1>
+      <span class="slogan">비움에도 기술이 있습니다.</span>
+      <p class="sub">점포·상가 철거부터 원상복구까지. 정부지원(최대 250만원)으로 부담은 줄이고, 복잡한 절차는 네모맨에게 맡기세요.</p>
+      <div class="hero-cta">
+        <a href="tel:15330000" class="btn btn-p btn-lg">☎ 전화 상담</a>
+        <a href="#contact" class="btn btn-glass btn-lg">견적 문의하기 →</a>
+      </div>
+      <div class="trust">
+        <span><span class="d">●</span> 정부지원 <b>최대 250만원</b></span>
+        <span><span class="d">●</span> 철거 <b>평당 20만원</b></span>
+        <span><span class="d">●</span> <b>검증된</b> 시공</span>
+      </div>
+    </div>
+    <div class="hero-vis">
+      <div class="ring" aria-hidden="true"></div>
+      <img src="assets/nm_hero_wall.png" alt="벽을 철거하는 네모맨 캐릭터">
+      <div class="chip chip-1">💰 정부지원 <span class="big">최대 250만원</span></div>
+      <div class="chip chip-2">폐업 철거 <b>원스톱</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="svc">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">🔧 네모맨이 하는 일</span><h2>철거부터 마무리까지, 한 번에</h2></div>
+    <div class="grid-4">
+      <div class="glass"><div class="ic">🏚️</div><h3>점포·상가 철거</h3><p>인테리어·칸막이·바닥·천정 등 부분/전체 철거를 깔끔하게.</p></div>
+      <div class="glass"><div class="ic">🧱</div><h3>원상복구</h3><p>임대차 계약에 맞춘 원상복구로 보증금 문제까지 마무리.</p></div>
+      <div class="glass"><div class="ic">♻️</div><h3>폐기물 처리</h3><p>집기·폐자재 반출부터 폐기물 처리까지 남김없이.</p></div>
+      <div class="glass"><div class="ic">📑</div><h3>정부지원 신청 대행</h3><p>복잡한 서류·정산 절차를 함께 챙겨드립니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec gov" id="gov">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">비용 &amp; 정부지원</span>
+      <h2>철거 <span class="amt">평당 20만원</span>,<br>정부지원 <span class="amt">최대 250만원</span></h2>
+      <p>소상공인시장진흥공단 <b>희망리턴패키지·원스톱폐업지원</b>의 '점포철거비 지원'을 받으면 폐업 철거 부담을 크게 덜 수 있어요. 지원 대상인지 먼저 확인해 드릴게요.</p>
+      <div class="gov-cta">
+        <a href="#contact" class="btn btn-y btn-lg">지원 대상 확인 &amp; 견적 →</a>
+        <a href="tel:15330000" class="btn btn-glass btn-lg">☎ 1533-0000</a>
+      </div>
+      <p class="note">* 철거 비용은 평당 20만원(부가세 별도) 기준이며 현장 상황에 따라 달라질 수 있습니다. 정부지원 자격은 공단 심사로 결정됩니다.</p>
+    </div>
+    <div class="gov-vis"><img src="assets/nm_pose_thumbs.png" alt="엄지척 네모맨"></div>
+  </div>
+</section>
+
+<section class="sec" id="proc">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">🔁 진행 절차</span><h2>전화 한 통이면, 이렇게 진행돼요</h2></div>
+    <div class="steps">
+      <div class="step"><div class="snum">1</div><h3>상담·접수</h3><p>전화 주시면 간편하게 접수해 드려요.</p></div>
+      <div class="step"><div class="snum">2</div><h3>현장실사·견적</h3><p>원하는 날짜에 방문, 투명한 견적 제공.</p></div>
+      <div class="step"><div class="snum">3</div><h3>철거 시공</h3><p>검증된 시공으로 안전하고 꼼꼼하게.</p></div>
+      <div class="step"><div class="snum">4</div><h3>정산·마무리</h3><p>정부지원 정산까지 함께 마무리.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">❓ 자주 묻는 질문</span><h2>궁금한 점을 모았어요</h2></div>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q">철거 비용은 얼마인가요?<span class="qic">+</span></button>
+        <div class="faq-a"><p>평당 20만원(부가세 별도)을 기준으로, 업종·철거 범위·폐기물량에 따라 조정됩니다. 정확한 금액은 무료 현장실사 후 투명하게 확정해 드립니다.</p></div></div>
+      <div class="faq-item"><button class="faq-q">정부지원(최대 250만원)은 누구나 받을 수 있나요?<span class="qic">+</span></button>
+        <div class="faq-a"><p>폐업하는 소상공인을 대상으로 하며 제외 요건이 있습니다. 전화 주시면 대상 여부를 먼저 확인해 드리고, 최종 자격은 공단 심사로 결정됩니다.</p></div></div>
+      <div class="faq-item"><button class="faq-q">신청하면 얼마나 빨리 진행되나요?<span class="qic">+</span></button>
+        <div class="faq-a"><p>접수 후 신속하게 연락드리며, 원하시는 날짜에 현장실사를 진행합니다. 일정에 맞춰 최대한 빠르게 도와드립니다.</p></div></div>
+      <div class="faq-item"><button class="faq-q">철거 후 인테리어도 맡길 수 있나요?<span class="qic">+</span></button>
+        <div class="faq-a"><p>네. 네모맨 철거의 모브랜드 <b>공간f5</b>가 인테리어를 진행합니다. 함께 문의하시면 더 매끄럽게 연결해 드려요.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec final" id="contact">
+  <div class="wrap">
+    <h2>고민은 철거를 늦출 뿐이에요</h2>
+    <p>전화 한 통이면 상담부터 견적까지. 네모맨이 새로운 시작을 도와드립니다.</p>
+    <div class="cta"><a href="tel:15330000" class="btn btn-y btn-lg">☎ 1533-0000 전화하기</a></div>
+  </div>
+</section>
+
+<footer class="ft">
+  <div class="wrap">
+    <div>
+      <a href="#" class="brand"><span class="bmark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <rect x="3.2" y="3.2" width="13" height="13" rx="3" stroke="#fff" stroke-width="2.4"/>
+        <rect x="9" y="9" width="11.5" height="11.5" rx="3" fill="#fff"/></svg></span>
+        <span class="bname"><b>네모맨 철거</b><small>공간 f5</small></span></a>
+      <p style="margin-top:16px;max-width:320px;color:var(--tx-3);font-size:.92rem">폐업 소상공인을 위한 정부지원 연계 철거. 비움에도 기술이 있습니다.</p>
+    </div>
+    <div><h4>바로가기</h4><div class="ft-links">
+      <a href="#gov">정부지원·비용</a><a href="#svc">서비스</a><a href="#faq">자주 묻는 질문</a><a href="#contact">견적 문의</a>
+    </div></div>
+    <div><h4>상담 문의</h4><div class="ft-info">
+      <div class="ph">☎ 1533-0000 <span style="font-size:.72rem;color:var(--tx-3)">(준비중)</span></div>
+      상호 공간f5 | 대표 준비중<br>사업자등록번호 준비중<br>주소 준비중<br>운영 평일 09:00~18:00
+    </div></div>
+  </div>
+  <div class="wrap ft-bot"><span>© 2026 공간f5. All rights reserved.</span><span>이용약관 · 개인정보처리방침 (준비중)</span></div>
+</footer>
+
+<div class="tag">시안 A · 다크 프리미엄</div>
+
+<script>
+document.querySelectorAll('.faq-item').forEach(item=>{
+  const q=item.querySelector('.faq-q'), a=item.querySelector('.faq-a');
+  q.addEventListener('click',()=>{const open=item.classList.toggle('open');
+    a.style.maxHeight=open?a.scrollHeight+'px':null;});
+});
+</script>
+</body>
+</html>
