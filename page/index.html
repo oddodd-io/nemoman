@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>네모맨 · 공간f5 — 폐업 철거, 정부지원까지 원스톱</title>
+    <meta name="description" content="폐업 소상공인을 위한 철거 매칭 + 정부지원 안내. 희망리턴패키지 최대 250만원 지원 연계. 비용계산기로 바로 확인하세요.">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 72px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--bg) 0%, var(--light-blue) 50%, var(--bg) 100%);
+        }
+
+        .hero-bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(42,76,219,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(245,179,1,0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--white);
+            color: var(--primary);
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hero-tag .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s ease infinite;
+        }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--ink);
+        }
+
+        .hero-title .highlight {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .hero-title .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            right: 0;
+            height: 12px;
+            background: var(--accent);
+            opacity: 0.3;
+            border-radius: 4px;
+            z-index: -1;
+        }
+
+        .hero-slogan {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 32px;
+        }
+
+        .hero-stat {
+            text-align: left;
+        }
+
+        .hero-stat-number {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        .hero-stat-label {
+            font-size: 0.85rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-character {
+            width: 100%;
+            max-width: 420px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-character img {
+            width: 100%;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-blob {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: var(--primary);
+            opacity: 0.08;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        .hero-blob-accent {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: var(--accent);
+            opacity: 0.15;
+            border-radius: 50%;
+            bottom: 10%;
+            right: 10%;
+            z-index: 1;
+        }
+
+        /* ===== EMPATHY SECTION ===== */
+        .empathy {
+            background: var(--white);
+        }
+
+        .empathy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .empathy-card {
+            background: var(--bg);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .empathy-card:hover {
+            background: var(--light-blue);
+            transform: translateY(-4px);
+        }
+
+        .empathy-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--white);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 1.8rem;
+        }
+
+        .empathy-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .empathy-card p {
+            font-size: 0.95rem;
+            color: var(--gray);
+        }
+
+        /* ===== SUPPORT BANNER ===== */
+        .support-banner {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .support-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+
+        .support-banner-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .support-banner-text h2 {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .support-banner-text p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .support-banner-amount {
+            text-align: center;
+        }
+
+        .support-banner-amount .amount {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent);
+        }
+
+        .support-banner-amount .label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* ===== CALCULATOR TEASER ===== */
+        .calc-teaser {
+            background: var(--bg);
+        }
+
+        .calc-teaser-inner {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 48px;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .calc-teaser-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .calc-teaser-result {
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--light-yellow) 100%);
+            border-radius: var(--radius);
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .calc-teaser-result .result-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 8px;
+        }
+
+        .calc-teaser-result .result-amount {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        .calc-teaser-result .result-note {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 8px;
+        }
+
+        .calc-teaser-disclaimer {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-align: center;
+        }
+
+        /* ===== SERVICES ===== */
+        .services {
+            background: var(--white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--bg);
+            border-radius: var(--radius-lg);
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow);
+        }
+
+        .service-icon {
+            width: 72px;
+            height: 72px;
+            background: var(--light-blue);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* ===== CROSS-SELL BRIDGE ===== */
+        .cross-sell {
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--bg) 100%);
+        }
+
+        .cross-sell-card {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 48px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .cross-sell-text h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .cross-sell-text p {
+            color: var(--gray);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .cross-sell-features {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .cross-sell-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .cross-sell-feature .check {
+            width: 24px;
+            height: 24px;
+            background: var(--success);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .cross-sell-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cross-sell-visual .placeholder {
+            width: 100%;
+            max-width: 300px;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--light-blue), var(--light-yellow));
+            border-radius: var(--radius-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        /* ===== PROCESS ===== */
+        .process {
+            background: var(--white);
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            position: relative;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 36px;
+            left: 60px;
+            right: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 3px;
+        }
+
+        .process-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .process-step-number {
+            width: 72px;
+            height: 72px;
+            background: var(--white);
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .process-step h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .process-step p {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        /* ===== STRENGTHS ===== */
+        .strengths {
+            background: var(--bg);
+        }
+
+        .strengths-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .strength-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            transition: all 0.3s ease;
+        }
+
+        .strength-card:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-4px);
+        }
+
+        .strength-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--light-blue);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .strength-text h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .strength-text p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        /* ===== CASES PREVIEW ===== */
+        .cases-preview {
+            background: var(--white);
+        }
+
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .case-card {
+            background: var(--bg);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .case-card:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-4px);
+        }
+
+        .case-image {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: linear-gradient(135deg, var(--light-blue), var(--light-gray));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+        }
+
+        .case-image .coming-soon {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--accent);
+            color: var(--ink);
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .case-info {
+            padding: 24px;
+        }
+
+        .case-meta {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .case-meta span {
+            font-size: 0.8rem;
+            color: var(--gray);
+            background: var(--white);
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .case-info h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .case-info p {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* ===== FAQ PREVIEW ===== */
+        .faq-preview {
+            background: var(--bg);
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: var(--radius);
+            margin-bottom: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .faq-question {
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: background 0.2s ease;
+        }
+
+        .faq-question:hover {
+            background: var(--light-blue);
+        }
+
+        .faq-question .icon {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-question .icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 0 24px 20px;
+        }
+
+        .faq-answer p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* ===== FINAL CTA ===== */
+        .final-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+
+        .final-cta::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: rgba(245,179,1,0.1);
+            border-radius: 50%;
+        }
+
+        .final-cta h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 900;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .final-cta p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .final-cta .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content {
+                order: 2;
+            }
+
+            .hero-visual {
+                order: 1;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-stat {
+                text-align: center;
+            }
+
+            .process-steps {
+                flex-wrap: wrap;
+            }
+
+            .process-steps::before {
+                display: none;
+            }
+
+            .process-step {
+                flex: 1 1 45%;
+            }
+
+            .cross-sell-card {
+                grid-template-columns: 1fr;
+            }
+
+            .calc-teaser-form {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: auto;
+                padding: 100px 0 60px;
+            }
+
+            .hero-character {
+                max-width: 280px;
+            }
+
+            .process-step {
+                flex: 1 1 100%;
+            }
+
+            .calc-teaser-inner {
+                padding: 28px;
+            }
+
+            .cross-sell-card {
+                padding: 28px;
+            }
+
+            .support-banner-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">F5</div>
+                <div>공간f5 <span>·</span> 네모맨</div>
+            </a>
+            <nav class="nav">
+                <a href="support.html">정부지원</a>
+                <a href="estimate.html">간편견적</a>
+                <a href="cases.html">시공사례</a>
+                <a href="partner.html">협력사</a>
+            </nav>
+            <div class="header-actions">
+                <a href="tel:010-0000-0000" class="phone-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    상담전화
+                </a>
+                <a href="estimate.html" class="btn btn-primary btn-sm">무료 견적</a>
+            </div>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="support.html">정부지원</a>
+        <a href="estimate.html">간편견적</a>
+        <a href="cases.html">시공사례</a>
+        <a href="partner.html">협력사</a>
+        <a href="faq.html">FAQ</a>
+        <a href="estimate.html" class="btn btn-primary">무료 견적 받기</a>
+    </div>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="hero-bg-pattern"></div>
+        <div class="hero-inner">
+            <div class="hero-content">
+                <div class="hero-tag">
+                    <span class="dot"></span>
+                    희망리턴패키지 지원 연계
+                </div>
+                <h1 class="hero-title">
+                    폐업 철거,<br>
+                    <span class="highlight">정부지원</span>까지<br>
+                    원스톱으로
+                </h1>
+                <p class="hero-slogan">"비움에도 기술이 있습니다."</p>
+                <p class="hero-desc">
+                    폐업이라는 힘든 순간, 철거 비용이 부담스러우신가요?<br>
+                    네모맨이 정부지원(최대 250만원) 연계부터<br>
+                    믿을 수 있는 철거 시공까지 함께합니다.
+                </p>
+                <div class="hero-cta-group">
+                    <a href="support.html" class="btn btn-primary btn-lg">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        자가진단 하기
+                    </a>
+                    <a href="estimate.html" class="btn btn-accent btn-lg">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        비용 계산하기
+                    </a>
+                    <a href="tel:010-0000-0000" class="btn btn-outline btn-lg">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        전화 상담
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">250만원</div>
+                        <div class="hero-stat-label">정부지원 최대</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">24시간</div>
+                        <div class="hero-stat-label">영업일 기준 답변</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">0원</div>
+                        <div class="hero-stat-label">견적 상담 무료</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-blob"></div>
+                <div class="hero-blob-accent"></div>
+                <div class="hero-character animate-float">
+                    <img src="assets/nemoman-hero.png" alt="네모맨 — 공간 철거 전문가" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="display:none; width:100%; max-width:380px; aspect-ratio:1; background:linear-gradient(135deg, var(--light-blue), var(--light-yellow)); border-radius:var(--radius-xl); align-items:center; justify-content:center; font-size:6rem;">🔨</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EMPATHY ===== -->
+    <section class="empathy section">
+        <div class="container">
+            <h2 class="section-title">폐업, 이런 고민이시죠?</h2>
+            <p class="section-subtitle">네모맨이 그 고민을 해결해 드립니다</p>
+            <div class="empathy-grid">
+                <div class="empathy-card">
+                    <div class="empathy-icon">💰</div>
+                    <h3>철거 비용이 부담되신다면</h3>
+                    <p>정부지원(희망리턴패키지) 최대 250만원 연계로 부담을 줄여드립니다</p>
+                </div>
+                <div class="empathy-card">
+                    <div class="empathy-icon">❓</div>
+                    <h3>얼마 나올지 감이 안 오신다면</h3>
+                    <p>비용계산기로 예상 견적 범위를 즉시 확인하세요</p>
+                </div>
+                <div class="empathy-card">
+                    <div class="empathy-icon">🤝</div>
+                    <h3>어느 업체를 믿을지 모르신다면</h3>
+                    <p>검증된 협력사 · 투명 견적 · 하자 A/S로 안심하세요</p>
+                </div>
+                <div class="empathy-card">
+                    <div class="empathy-icon">📋</div>
+                    <h3>절차가 복잡하신가요</h3>
+                    <p>상담 → 견적 → 시공 → 정산까지 원스톱으로 진행합니다</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SUPPORT BANNER ===== -->
+    <section class="support-banner">
+        <div class="support-banner-inner">
+            <div class="support-banner-text">
+                <h2>소상공인 희망리턴패키지</h2>
+                <p>점포철거비 지원 제도 — 네모맨이 신청부터 정산까지 도와드립니다</p>
+            </div>
+            <div class="support-banner-amount">
+                <div class="amount">250만원</div>
+                <div class="label">최대 지원금액</div>
+            </div>
+            <a href="support.html" class="btn btn-white btn-lg">지원 대상 확인하기 →</a>
+        </div>
+    </section>
+
+    <!-- ===== CALCULATOR TEASER ===== -->
+    <section class="calc-teaser section">
+        <div class="container">
+            <h2 class="section-title">지금 바로 예상 비용 확인</h2>
+            <p class="section-subtitle">몇 가지 정보만 입력하면 예상 견적 범위를 알려드려요</p>
+            <div class="calc-teaser-inner">
+                <div class="calc-teaser-form">
+                    <div class="form-group">
+                        <label class="form-label">건물 유형</label>
+                        <select class="form-select" id="calcType">
+                            <option value="">선택하세요</option>
+                            <option value="store">상가/점포</option>
+                            <option value="office">사무실</option>
+                            <option value="factory">공장</option>
+                            <option value="house">주택</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">업종</label>
+                        <select class="form-select" id="calcCategory">
+                            <option value="">선택하세요</option>
+                            <option value="food">음식점</option>
+                            <option value="retail">소매점</option>
+                            <option value="service">서비스업</option>
+                            <option value="office">사무실</option>
+                            <option value="other">기타</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">평수</label>
+                        <input type="number" class="form-input" id="calcSize" placeholder="예: 30">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">철거 범위</label>
+                        <select class="form-select" id="calcScope">
+                            <option value="">선택하세요</option>
+                            <option value="partial">부분 철거</option>
+                            <option value="full">전체 철거</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="calc-teaser-result" id="calcResult" style="display:none;">
+                    <div class="result-label">예상 견적 범위</div>
+                    <div class="result-amount" id="calcAmount">0 ~ 0만원</div>
+                    <div class="result-note" id="calcSupport">정부지원 대상 시 예상 자기부담금: 0만원</div>
+                </div>
+                <div style="text-align:center; margin-bottom:16px;">
+                    <button class="btn btn-primary btn-lg" onclick="calculateTeaser()" id="calcBtn">예상 비용 계산하기</button>
+                    <a href="estimate.html" class="btn btn-outline btn-lg" style="margin-left:12px;">상세 견적 신청 →</a>
+                </div>
+                <p class="calc-teaser-disclaimer">※ 예상 금액이며, 실제 견적은 현장 실사 후 확정됩니다. 정부지원 금액은 공식 확인이 필요합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="services section">
+        <div class="container">
+            <h2 class="section-title">네모맨이 하는 일</h2>
+            <p class="section-subtitle">철거부터 정부지원까지, 공간 새로고침의 모든 것</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🔨</div>
+                    <h3>철거 시공</h3>
+                    <p>상가·사무실·공장·주택 등 다양한 유형의 전문 철거 시공을 제공합니다</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏗️</div>
+                    <h3>원상복구</h3>
+                    <p>임대차 계약상 원상복구 의무를 정확하게 이행해 드립니다</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">♻️</div>
+                    <h3>폐기물 처리</h3>
+                    <p>철거 후 발생하는 폐기물을 적법하게 처리해 드립니다</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏛️</div>
+                    <h3>정부지원 대행</h3>
+                    <p>희망리턴패키지 등 정부지원 신청·정산을 대행해 드립니다</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CROSS-SELL BRIDGE ===== -->
+    <section class="cross-sell section">
+        <div class="container">
+            <div class="cross-sell-card">
+                <div class="cross-sell-text">
+                    <span class="tag tag-primary" style="margin-bottom:16px;">공간f5 인테리어</span>
+                    <h3>철거 후 인테리어까지</h3>
+                    <p>비웠으면 이제 채울 차례입니다. 공간f5가 새로운 공간을 디자인해 드립니다. 철거와 인테리어를 함께 진행하면 비용과 시간을 절약할 수 있습니다.</p>
+                    <div class="cross-sell-features">
+                        <div class="cross-sell-feature">
+                            <span class="check">✓</span>
+                            <span>철거 + 인테리어 패키지 할인</span>
+                        </div>
+                        <div class="cross-sell-feature">
+                            <span class="check">✓</span>
+                            <span>원스톱 시공으로 기간 단축</span>
+                        </div>
+                        <div class="cross-sell-feature">
+                            <span class="check">✓</span>
+                            <span>업종별 맞춤 공간 설계</span>
+                        </div>
+                        <div class="cross-sell-feature">
+                            <span class="check">✓</span>
+                            <span>리뉴얼·업종변경·신규 입점 모두 가능</span>
+                        </div>
+                    </div>
+                    <a href="estimate.html" class="btn btn-primary">인테리어 견적도 함께 받기</a>
+                </div>
+                <div class="cross-sell-visual">
+                    <div class="placeholder">🏠</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROCESS ===== -->
+    <section class="process section">
+        <div class="container">
+            <h2 class="section-title">네모맨 시공 프로세스</h2>
+            <p class="section-subtitle">상담부터 정산까지, 투명하게 진행됩니다</p>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="process-step-number">1</div>
+                    <h4>상담 신청</h4>
+                    <p>전화 또는 견적 폼으로<br>간편하게 신청</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-number">2</div>
+                    <h4>현장 실사</h4>
+                    <p>전문가가 직접 방문해<br>정확한 견적 산출</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-number">3</div>
+                    <h4>견적 확정</h4>
+                    <p>투명한 견적서 제공<br>추가비용 없음</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-number">4</div>
+                    <h4>시공 진행</h4>
+                    <p>검증된 협력사의<br>안전한 시공</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-number">5</div>
+                    <h4>정산·마무리</h4>
+                    <p>정부지원 정산까지<br>원스톱 완료</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STRENGTHS ===== -->
+    <section class="strengths section">
+        <div class="container">
+            <h2 class="section-title">왜 네모맨인가요?</h2>
+            <p class="section-subtitle">실적이 없어도, 약속으로 신뢰를 만듭니다</p>
+            <div class="strengths-grid">
+                <div class="strength-card">
+                    <div class="strength-icon">🏛️</div>
+                    <div class="strength-text">
+                        <h4>정부 공식 연계</h4>
+                        <p>희망리턴패키지 등 정부지원 제도를 공식적으로 연계해 드립니다</p>
+                    </div>
+                </div>
+                <div class="strength-card">
+                    <div class="strength-icon">💎</div>
+                    <div class="strength-text">
+                        <h4>투명한 견적</h4>
+                        <p>비용계산기로 미리 예상하고, 현장 실사 후 확정된 금액만 제시합니다</p>
+                    </div>
+                </div>
+                <div class="strength-card">
+                    <div class="strength-icon">🛡️</div>
+                    <div class="strength-text">
+                        <h4>하자 A/S 보장</h4>
+                        <p>시공 완료 후에도 하자 발생 시 책임지고 A/S 처리해 드립니다</p>
+                    </div>
+                </div>
+                <div class="strength-card">
+                    <div class="strength-icon">⚡</div>
+                    <div class="strength-text">
+                        <h4>빠른 현장 실사</h4>
+                        <p>신청 후 영업일 기준 빠른 실사 일정을 잡아 드립니다</p>
+                    </div>
+                </div>
+                <div class="strength-card">
+                    <div class="strength-icon">🔒</div>
+                    <div class="strength-text">
+                        <h4>안전한 결제</h4>
+                        <p>에스크로 등 안전한 결제 방식으로 고객님의 금전적 안심을 보장합니다</p>
+                    </div>
+                </div>
+                <div class="strength-card">
+                    <div class="strength-icon">📑</div>
+                    <div class="strength-text">
+                        <h4>폐업 행정 대행</h4>
+                        <p>원상복구·폐기물 처리 등 폐업 관련 행정 절차도 함께 도와드립니다</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CASES PREVIEW ===== -->
+    <section class="cases-preview section">
+        <div class="container">
+            <h2 class="section-title">시공 사례</h2>
+            <p class="section-subtitle">네모맨이 함께한 공간 새로고침</p>
+            <div class="cases-grid">
+                <div class="case-card">
+                    <div class="case-image">
+                        <span class="coming-soon">준비중</span>
+                        🏪
+                    </div>
+                    <div class="case-info">
+                        <div class="case-meta">
+                            <span>음식점</span>
+                            <span>서울 강남</span>
+                            <span>30평</span>
+                        </div>
+                        <h3>분식점 원상복구 철거</h3>
+                        <p>영업 종료 후 임대인 요청에 따른 원상복구 및 철거 시공</p>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <div class="case-image">
+                        <span class="coming-soon">준비중</span>
+                        🏢
+                    </div>
+                    <div class="case-info">
+                        <div class="case-meta">
+                            <span>사무실</span>
+                            <span>경기 수원</span>
+                            <span>50평</span>
+                        </div>
+                        <h3>스타트업 사무실 철거</h3>
+                        <p>사업 종료 후 사무실 전체 철거 및 폐기물 처리</p>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <div class="case-image">
+                        <span class="coming-soon">준비중</span>
+                        🏭
+                    </div>
+                    <div class="case-info">
+                        <div class="case-meta">
+                            <span>소매점</span>
+                            <span>부산 해운대</span>
+                            <span>20평</span>
+                        </div>
+                        <h3>의류매장 원상복구</h3>
+                        <p>폐업 후 매장 인테리어 원상복구 및 철거 시공</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align:center; margin-top:32px;">
+                <a href="cases.html" class="btn btn-outline">더 많은 사례 보기 →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ PREVIEW ===== -->
+    <section class="faq-preview section">
+        <div class="container">
+            <h2 class="section-title">자주 묻는 질문</h2>
+            <p class="section-subtitle">궁금한 점을 미리 확인해 보세요</p>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>정부지원(희망리턴패키지)을 받으려면 어떤 조건이 필요한가요?</span>
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>희망리턴패키지 점포철거비 지원은 폐업 예정 소상공인을 대상으로 합니다. 자세한 대상 여부는 자가진단 페이지에서 확인하실 수 있으며, 최종 자격은 소상공인시장진흥공단의 심사를 통해 결정됩니다. 지원금액은 최대 250만원이며, 실제 지원 여부는 공식 확인이 필요합니다.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>비용계산기의 예상 금액은 정확한가요?</span>
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>비용계산기는 업종, 평수, 철거 범위 등을 기준으로 한 예상 견적 범위입니다. 실제 철거 비용은 현장 상태, 폐기물량, 접근성 등 다양한 요인에 따라 달라질 수 있으므로, 정확한 견적은 현장 실사 후 확정됩니다.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>철거 후 인테리어까지 한 번에 진행할 수 있나요?</span>
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>네, 가능합니다. 네모맨(철거)과 공간f5(인테리어)를 함께 진행하시면 철거와 인테리어를 연계하여 비용과 시간을 절약할 수 있습니다. 견적 신청 시 "인테리어 관심 여부"를 체크해 주시면 상담 시 함께 안내해 드립니다.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>견적 신청 후 언제 연락이 오나요?</span>
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>견적 신청 후 영업일 기준 24시간 이내에 담당자가 연락을 드립니다. 긴급한 경우 전화 상담을 이용해 주시면 더 빠르게 도와드릴 수 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align:center; margin-top:32px;">
+                <a href="faq.html" class="btn btn-outline">전체 FAQ 보기 →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FINAL CTA ===== -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>지금 바로 새로고침을 시작하세요</h2>
+            <p>폐업은 끝이 아닙니다. 네모맨이 새로운 시작을 함께합니다.</p>
+            <div class="btn-group">
+                <a href="estimate.html" class="btn btn-accent btn-lg">무료 견적 신청하기</a>
+                <a href="tel:010-0000-0000" class="btn btn-white btn-lg">전화 상담하기</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-icon">F5</div>
+                        <div>공간f5 <span>·</span> 네모맨</div>
+                    </div>
+                    <p>폐업 소상공인을 위한 철거 매칭 + 정부지원 안내 플랫폼.<br>비움에도 기술이 있습니다.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>서비스</h4>
+                    <a href="support.html">정부지원 안내</a>
+                    <a href="estimate.html">간편견적</a>
+                    <a href="cases.html">시공사례</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+                <div class="footer-col">
+                    <h4>파트너</h4>
+                    <a href="partner.html">협력사 모집</a>
+                    <a href="#">공간f5 인테리어</a>
+                </div>
+                <div class="footer-col">
+                    <h4>고객센터</h4>
+                    <a href="tel:010-0000-0000">010-0000-0000</a>
+                    <a href="#">운영시간: 평일 09:00 ~ 18:00</a>
+                    <a href="terms.html">이용약관</a>
+                    <a href="privacy.html">개인정보처리방침</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>
+                    상호: 공간f5 | 대표: (준비중) | 사업자등록번호: (준비중) | 주소: (준비중)
+                </div>
+                <div>© 2026 공간f5 · 네모맨. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== FLOATING CTA ===== -->
+    <div class="floating-cta">
+        <a href="estimate.html" class="floating-btn primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <span class="tooltip">간편견적</span>
+        </a>
+        <a href="partner.html" class="floating-btn accent">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span class="tooltip">협력사 입점</span>
+        </a>
+        <a href="tel:010-0000-0000" class="floating-btn phone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span class="tooltip">전화상담</span>
+        </a>
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        }
+
+        // FAQ toggle
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            const wasActive = item.classList.contains('active');
+
+            // Close all
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+
+            // Toggle current
+            if (!wasActive) {
+                item.classList.add('active');
+            }
+        }
+
+        // Calculator teaser
+        function calculateTeaser() {
+            const type = document.getElementById('calcType').value;
+            const category = document.getElementById('calcCategory').value;
+            const size = parseFloat(document.getElementById('calcSize').value);
+            const scope = document.getElementById('calcScope').value;
+
+            if (!type || !category || !size || !scope) {
+                alert('모든 항목을 입력해 주세요.');
+                return;
+            }
+
+            // Simple calculation logic (example)
+            let basePrice = size * 15; // 15만원 per pyeong base
+
+            if (scope === 'full') basePrice *= 1.5;
+            if (category === 'food') basePrice *= 1.3;
+            if (category === 'factory') basePrice *= 1.2;
+
+            const minPrice = Math.round(basePrice * 0.8);
+            const maxPrice = Math.round(basePrice * 1.2);
+
+            const supportAmount = Math.min(250, Math.round(maxPrice * 0.6));
+            const selfPay = Math.max(0, Math.round((minPrice + maxPrice) / 2 - supportAmount));
+
+            document.getElementById('calcAmount').textContent = minPrice + ' ~ ' + maxPrice + '만원';
+            document.getElementById('calcSupport').textContent = '정부지원 대상 시 예상 자기부담금: 약 ' + selfPay + '만원 (지원금 ' + supportAmount + '만원)';
+            document.getElementById('calcResult').style.display = 'block';
+
+            document.getElementById('calcBtn').textContent = '다시 계산하기';
+        }
+
+        // Scroll header effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 2px 20px rgba(20,24,58,0.08)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

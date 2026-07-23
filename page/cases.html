@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시공사례 — 네모맨 · 공간f5</title>
+    <meta name="description" content="네모맨의 철거 시공 사례를 확인하세요. 상가, 사무실, 공장 등 다양한 유형의 철거·원상복구 사례입니다.">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: 140px 0 80px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* ===== FILTER ===== */
+        .filter-bar {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+            position: sticky;
+            top: 72px;
+            z-index: 100;
+        }
+
+        .filter-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-btn {
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 2px solid var(--border);
+            background: var(--white);
+            color: var(--ink);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        /* ===== CASES GRID ===== */
+        .cases-section {
+            background: var(--bg);
+            padding: 48px 0 80px;
+        }
+
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 28px;
+        }
+
+        .case-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .case-card:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-6px);
+        }
+
+        .case-images {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+        }
+
+        .case-image {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+        }
+
+        .case-image.before {
+            background: linear-gradient(135deg, #e2e2df, #d0d0cc);
+        }
+
+        .case-image.after {
+            background: linear-gradient(135deg, var(--light-blue), var(--light-yellow));
+            display: none;
+        }
+
+        .case-card:hover .case-image.before {
+            display: none;
+        }
+
+        .case-card:hover .case-image.after {
+            display: flex;
+        }
+
+        .case-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--accent);
+            color: var(--ink);
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .case-badge.coming {
+            background: var(--gray);
+            color: var(--white);
+        }
+
+        .case-info {
+            padding: 24px;
+        }
+
+        .case-meta {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .case-meta span {
+            font-size: 0.8rem;
+            color: var(--gray);
+            background: var(--bg);
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .case-info h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .case-info p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .case-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .case-price .label {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .case-price .value {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .case-review {
+            margin-top: 12px;
+            padding: 12px;
+            background: var(--bg);
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            color: var(--gray);
+            font-style: italic;
+        }
+
+        .case-review::before {
+            content: '"';
+            font-size: 1.5rem;
+            color: var(--primary);
+            line-height: 0;
+        }
+
+        /* ===== EMPTY STATE ===== */
+        .empty-state {
+            text-align: center;
+            padding: 80px 24px;
+        }
+
+        .empty-state .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            color: var(--gray);
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .cases-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-bar {
+                top: 64px;
+            }
+
+            .filter-inner {
+                padding: 0 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">F5</div>
+                <div>공간f5 <span>·</span> 네모맨</div>
+            </a>
+            <nav class="nav">
+                <a href="support.html">정부지원</a>
+                <a href="estimate.html">간편견적</a>
+                <a href="cases.html" class="active">시공사례</a>
+                <a href="partner.html">협력사</a>
+            </nav>
+            <div class="header-actions">
+                <a href="tel:010-0000-0000" class="phone-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    상담전화
+                </a>
+                <a href="estimate.html" class="btn btn-primary btn-sm">무료 견적</a>
+            </div>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="support.html">정부지원</a>
+        <a href="estimate.html">간편견적</a>
+        <a href="cases.html">시공사례</a>
+        <a href="partner.html">협력사</a>
+        <a href="faq.html">FAQ</a>
+        <a href="estimate.html" class="btn btn-primary">무료 견적 받기</a>
+    </div>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="page-header">
+        <div class="container">
+            <h1>시공 사례</h1>
+            <p>네모맨이 함께한 공간 새로고침의 기록입니다</p>
+        </div>
+    </section>
+
+    <!-- ===== FILTER ===== -->
+    <div class="filter-bar">
+        <div class="filter-inner">
+            <button class="filter-btn active" onclick="filterCases('all', this)">전체</button>
+            <button class="filter-btn" onclick="filterCases('food', this)">음식점</button>
+            <button class="filter-btn" onclick="filterCases('retail', this)">소매점</button>
+            <button class="filter-btn" onclick="filterCases('office', this)">사무실</button>
+            <button class="filter-btn" onclick="filterCases('service', this)">서비스업</button>
+        </div>
+    </div>
+
+    <!-- ===== CASES ===== -->
+    <section class="cases-section">
+        <div class="container">
+            <div class="cases-grid" id="casesGrid">
+                <!-- Case 1 -->
+                <div class="case-card" data-category="food">
+                    <div class="case-images">
+                        <div class="case-image before">
+                            <span class="case-badge coming">준비중</span>
+                            🍜
+                        </div>
+                        <div class="case-image after">
+                            <span class="case-badge">완료</span>
+                            ✨
+                        </div>
+                    </div>
+                    <div class="case-info">
+                        <div class="case-meta">
+                            <span>음식점</span>
+                            <span>서울 강남</span>
+                            <span>30평</span>
+                        </div>
+                        <h3>분식점 원상복구 철거</h3>
+                        <p>8년 운영한 분식점 폐업 후 임대인 요청에 따른 원상복구 및 철거 시공. 주방 설비 분리 후 바닥 및 벽체 원상복구 완료.</p>
+                        <div class="case-price">
+                            <span class="label">예상 견적</span>
+                            <span class="value">180만원</span>
+                        </div>
+                        <div class="case-review">
+                            정부지원 연계로 부담을 크게 줄일 수 있었어요. 깔끔하게 마무리해 주셔서 감사합니다.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 2 -->
+                <div class="case-card" data-category="office">
+                    <div class="case-images">
+                        <div class="case-image before">
+                            <span class="case-badge coming">준비중</span>
+                            🏢
+                        </div>
+                        <div class="case-image after">
+                            <span class="case-badge">완료</span>
+                            ✨
+                        </div>
+                    </div>
+                    <div class="case-info">
+                        <div class="case-meta">
+                            <span>사무실</span>
+                            <span>경기 수원</span>
+                            <span>50평</span>
+                        </div>
+                        <h3>스타트업 사무실 전체 철거</h3>
+                        <p>사업 종료 후 사무실 전체 철거. 파티션, 바닥재, 전기 설비 등 전면 철거 및 폐기물 처리 완료.</p>
+                        <div class="case-price">
+                            <span class="label">예상 견적</span>
+                            <span class="value">320만원</span>
+                        </div>
+                        <div class="case-review">
+                            예상보다 빠르게 진행되어 계약 만료일 전에 마무리할 수 있었습니다. 프로세스가 투명해서 좋았어요.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 3 -->
+                <div class="case-card" data-category="retail">
+                    <div class="case-images">
+                        <div class="case-image before">
+                            <span class="case-badge coming">준비중</span>
+                            👕
+                        </div>
+                        <div class="case-image after">
+                            <span class="case-badge">완료</span>
+                            ✨
+                        </div>
+                    </div>
+                    <div class="case-info">
+                        <div class="case-meta">
+                            <span>소매점</span>
+                            <span>부산 해운대</span>
+                            <span>20평</span>
+                        </div>
+                        <h3>의류매장 원상복구 철거</h3>
+                        <p>폐업 후 매장 인테리어 원상복구. 진열대, 조명, 바닥재 철거 후 임대인 요구 조건에 맞게 복구 완료.</p>
+                        <div class="case-price">
+                            <span class="label">예상 견적</span>
+                            <span class="value">150만원</span>
+                        </div>
+                        <div class="case-review">
+                            철거 후 인테리어까지 한 번에 진행해서 시간과 비용을 절약했어요. 다음에도 이용하고 싶습니다.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 4 -->
+                <div class="case-card" data-category="service">
+                    <div class="case-images">
+                        <div class="case-image before">
+                            <span class="case-badge coming">준비중</span>
+                            💇
+                        </div>
+                        <div class="case-image after">
+                            <span class="case-badge">완료</span>
+                            ✨
+                        </div>
+                    </div>
+                    <div class="case-info">
+                        <div class="case-meta">
+                            <span>서비스업</span>
+                            <span>대구 중구</span>
+                            <span>15평</span>
+                        </div>
+                        <h3>미용실 부분 철거</h3>
+                        <p>업종 변경을 위한 부분 철거. 샴푸대, 의자, 거울 등 일부 설비만 철거 후 새 업종 인테리어 준비.</p>
+                        <div class="case-price">
+                            <span class="label">예상 견적</span>
+                            <span class="value">80만원</span>
+                        </div>
+                        <div class="case-review">
+                            부분 철거라 걱정했는데, 필요한 것만 정확히 철거해 주셔서 다음 인테리어 비용도 줄었어요.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 5 -->
+                <div class="case-card" data-category="food">
+                    <div class="case-images">
+                        <div class="case-image before">
+                            <span class="case-badge coming">준비중</span>
+                            🍗
+                        </div>
+                        <div class="case-image after">
+                            <span class="case-badge">완료</span>
+                            ✨
+                        </div>
+                    </div>
+                    <div class="case-info">
+                        <div class="case-meta">
+                            <span>음식점</span>
+                            <span>서울 마포</span>
+                            <span>40평</span>
+                        </div>
+                        <h3>치킨집 전체 철거 및 원상복구</h3>
+                        <p>10년 운영한 치킨집 폐업 후 전체 철거. 주방 중화기, 후드, 냉장고 등 중장비 동원 철거 완료.</p>
+                        <div class="case-price">
+                            <span class="label">예상 견적</span>
+                            <span class="value">280만원</span>
+                        </div>
+                        <div class="case-review">
+                            정부지원금이 예상보다 많이 나와서 부담이 훨씬 줄었습니다. 복잡한 서류도 다 도와주셔서 편했어요.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 6 -->
+                <div class="case-card" data-category="office">
+                    <div class="case-images">
+                        <div class="case-image before">
+                            <span class="case-badge coming">준비중</span>
+                            📦
+                        </div>
+                        <div class="case-image after">
+                            <span class="case-badge">완료</span>
+                            ✨
+                        </div>
+                    </div>
+                    <div class="case-info">
+                        <div class="case-meta">
+                            <span>사무실</span>
+                            <span>경기 성남</span>
+                            <span>35평</span>
+                        </div>
+                        <h3>물류사무실 철거</h3>
+                        <p>사무실 이전으로 인한 기존 사무실 전체 철거. 책상, 파티션, 서버실 설비 등 안전하게 분리 철거.</p>
+                        <div class="case-price">
+                            <span class="label">예상 견적</span>
+                            <span class="value">200만원</span>
+                        </div>
+                        <div class="case-review">
+                            서버실 설비도 안전하게 분리해 주셔서 데이터 유출 걱정 없었습니다. 전문성이 느껴졌어요.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="empty-state" id="emptyState" style="display:none;">
+                <div class="icon">🔍</div>
+                <h3>해당 카테고리의 사례가 없습니다</h3>
+                <p>다른 카테고리를 선택하시거나, 새로운 사례를 기다려주세요.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA BANNER ===== -->
+    <section style="background:linear-gradient(135deg, var(--primary), var(--primary-dark)); padding:60px 0; text-align:center; color:var(--white);">
+        <div class="container">
+            <h2 style="font-size:clamp(1.5rem, 3vw, 2.2rem); font-weight:900; margin-bottom:16px;">당신의 사례도 여기에 올라갈 수 있습니다</h2>
+            <p style="font-size:1.1rem; opacity:0.9; margin-bottom:24px;">지금 바로 간편견적을 신청하고, 네모맨과 함께 새로운 시작을 하세요</p>
+            <a href="estimate.html" class="btn btn-accent btn-lg">무료 견적 신청하기 →</a>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-icon">F5</div>
+                        <div>공간f5 <span>·</span> 네모맨</div>
+                    </div>
+                    <p>폐업 소상공인을 위한 철거 매칭 + 정부지원 안내 플랫폼.<br>비움에도 기술이 있습니다.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>서비스</h4>
+                    <a href="support.html">정부지원 안내</a>
+                    <a href="estimate.html">간편견적</a>
+                    <a href="cases.html">시공사례</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+                <div class="footer-col">
+                    <h4>파트너</h4>
+                    <a href="partner.html">협력사 모집</a>
+                    <a href="#">공간f5 인테리어</a>
+                </div>
+                <div class="footer-col">
+                    <h4>고객센터</h4>
+                    <a href="tel:010-0000-0000">010-0000-0000</a>
+                    <a href="#">운영시간: 평일 09:00 ~ 18:00</a>
+                    <a href="terms.html">이용약관</a>
+                    <a href="privacy.html">개인정보처리방침</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>상호: 공간f5 | 대표: (준비중) | 사업자등록번호: (준비중) | 주소: (준비중)</div>
+                <div>© 2026 공간f5 · 네모맨. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== FLOATING CTA ===== -->
+    <div class="floating-cta">
+        <a href="estimate.html" class="floating-btn primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <span class="tooltip">간편견적</span>
+        </a>
+        <a href="partner.html" class="floating-btn accent">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span class="tooltip">협력사 입점</span>
+        </a>
+        <a href="tel:010-0000-0000" class="floating-btn phone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span class="tooltip">전화상담</span>
+        </a>
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        }
+
+        function filterCases(category, btn) {
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Filter cards
+            const cards = document.querySelectorAll('.case-card');
+            let visible = 0;
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                    visible++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Show/hide empty state
+            document.getElementById('emptyState').style.display = visible === 0 ? 'block' : 'none';
+        }
+
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 2px 20px rgba(20,24,58,0.08)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

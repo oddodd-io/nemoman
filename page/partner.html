@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>협력사 모집 — 네모맨 · 공간f5</title>
+    <meta name="description" content="네모맨 협력사로 입점하세요. 안정적인 일감, 마케팅 비용 절감, 브랜드 신뢰를 제공합니다.">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: 140px 0 80px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* ===== BENEFITS ===== */
+        .benefits {
+            background: var(--white);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .benefit-card {
+            background: var(--bg);
+            border-radius: var(--radius-lg);
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .benefit-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow);
+        }
+
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--light-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2.2rem;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .benefit-card p {
+            font-size: 0.95rem;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* ===== FORM SECTION ===== */
+        .partner-form-section {
+            background: var(--bg);
+        }
+
+        .partner-form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 48px;
+            box-shadow: var(--shadow);
+        }
+
+        .partner-form-container h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .partner-form-container > p {
+            text-align: center;
+            color: var(--gray);
+            margin-bottom: 32px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-grid .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .business-types {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .business-type-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 14px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .business-type-item:hover {
+            border-color: var(--primary);
+            background: var(--light-blue);
+        }
+
+        .business-type-item input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+        }
+
+        .file-upload {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: var(--bg);
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+            background: var(--light-blue);
+        }
+
+        .file-upload .upload-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .file-upload p {
+            font-size: 0.95rem;
+            color: var(--gray);
+            margin-bottom: 4px;
+        }
+
+        .file-upload .upload-hint {
+            font-size: 0.8rem;
+            color: var(--gray-light);
+        }
+
+        .agreement-box {
+            background: var(--bg);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            margin: 24px 0;
+        }
+
+        .agreement-box .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .agreement-box .checkbox-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .agreement-box input {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--primary);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .agreement-box label {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        .agreement-box label a {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .submit-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 32px;
+        }
+
+        /* ===== COMPLETE ===== */
+        .complete-message {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .complete-message.show {
+            display: block;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        .complete-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--success), #16a34a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 3rem;
+            color: var(--white);
+        }
+
+        .complete-message h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .complete-message p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .partner-form-container {
+                padding: 28px;
+            }
+
+            .form-grid, .business-types {
+                grid-template-columns: 1fr;
+            }
+
+            .submit-actions {
+                flex-direction: column;
+            }
+
+            .submit-actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">F5</div>
+                <div>공간f5 <span>·</span> 네모맨</div>
+            </a>
+            <nav class="nav">
+                <a href="support.html">정부지원</a>
+                <a href="estimate.html">간편견적</a>
+                <a href="cases.html">시공사례</a>
+                <a href="partner.html" class="active">협력사</a>
+            </nav>
+            <div class="header-actions">
+                <a href="tel:010-0000-0000" class="phone-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    상담전화
+                </a>
+                <a href="estimate.html" class="btn btn-primary btn-sm">무료 견적</a>
+            </div>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="support.html">정부지원</a>
+        <a href="estimate.html">간편견적</a>
+        <a href="cases.html">시공사례</a>
+        <a href="partner.html">협력사</a>
+        <a href="faq.html">FAQ</a>
+        <a href="estimate.html" class="btn btn-primary">무료 견적 받기</a>
+    </div>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="page-header">
+        <div class="container">
+            <h1>협력사 모집</h1>
+            <p>네모맨과 함께 성장할 철거 전문 업체를 모십니다</p>
+        </div>
+    </section>
+
+    <!-- ===== BENEFITS ===== -->
+    <section class="benefits section">
+        <div class="container">
+            <h2 class="section-title">협력사 혜택</h2>
+            <p class="section-subtitle">네모맨 파트너가 되면 이런 장점이 있습니다</p>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">📋</div>
+                    <h3>공식 계약 보장</h3>
+                    <p>네모맨과 공식 계약을 체결하여 안정적인 협력 관계를 구축합니다. 명확한 계약 조건으로 서로의 권리를 보장합니다.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">👥</div>
+                    <h3>고객 문의 직접 연결</h3>
+                    <p>마케팅 비용 없이 네모맨 플랫폼을 통해 고객 문의를 직접 받습니다. 영업 인력 없이도 안정적인 일감을 확보하세요.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🚛</div>
+                    <h3>차량 스티커 지원</h3>
+                    <p>네모맨 브랜드 차량 스티커를 지원해 드립니다. 이동 중에도 브랜드 노출 효과를 누리세요.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🦺</div>
+                    <h3>안전 장비 지원</h3>
+                    <p>안전한 시공을 위한 장비를 지원합니다. 작업자의 안전을 최우선으로 생각하는 네모맨의 파트너가 되세요.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FORM ===== -->
+    <section class="partner-form-section section">
+        <div class="container">
+            <div class="partner-form-container" id="formContainer">
+                <h2>협력사 입점 신청</h2>
+                <p>아래 정보를 입력해 주시면 검토 후 연락을 드립니다</p>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">업체명 <span style="color:var(--danger)">*</span></label>
+                        <input type="text" class="form-input" id="pName" placeholder="업체명을 입력하세요" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">담당자 성함 <span style="color:var(--danger)">*</span></label>
+                        <input type="text" class="form-input" id="pManager" placeholder="담당자 성함" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">연락처 <span style="color:var(--danger)">*</span></label>
+                        <input type="tel" class="form-input" id="pPhone" placeholder="010-0000-0000" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">이메일</label>
+                        <input type="email" class="form-input" id="pEmail" placeholder="email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">소재지 <span style="color:var(--danger)">*</span></label>
+                        <select class="form-select" id="pRegion" required>
+                            <option value="">선택하세요</option>
+                            <option value="seoul">서울</option>
+                            <option value="gyeonggi">경기</option>
+                            <option value="incheon">인천</option>
+                            <option value="busan">부산</option>
+                            <option value="daegu">대구</option>
+                            <option value="daejeon">대전</option>
+                            <option value="gwangju">광주</option>
+                            <option value="ulsan">울산</option>
+                            <option value="sejong">세종</option>
+                            <option value="gangwon">강원</option>
+                            <option value="chungbuk">충북</option>
+                            <option value="chungnam">충남</option>
+                            <option value="jeonbuk">전북</option>
+                            <option value="jeonnam">전남</option>
+                            <option value="gyeongbuk">경북</option>
+                            <option value="gyeongnam">경남</option>
+                            <option value="jeju">제주</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">시공 가능 지역</label>
+                        <input type="text" class="form-input" id="pServiceRegion" placeholder="예: 서울 전역, 경기 수원/성남">
+                    </div>
+                </div>
+
+                <div class="form-group full" style="margin-top:20px;">
+                    <label class="form-label">사업 구분 <span style="color:var(--danger)">*</span> (다중 선택 가능)</label>
+                    <div class="business-types">
+                        <div class="business-type-item">
+                            <input type="checkbox" id="biz1" value="interior">
+                            <label for="biz1">인테리어 철거</label>
+                        </div>
+                        <div class="business-type-item">
+                            <input type="checkbox" id="biz2" value="building">
+                            <label for="biz2">건물 철거</label>
+                        </div>
+                        <div class="business-type-item">
+                            <input type="checkbox" id="biz3" value="waste">
+                            <label for="biz3">폐기물 처리</label>
+                        </div>
+                        <div class="business-type-item">
+                            <input type="checkbox" id="biz4" value="restore">
+                            <label for="biz4">원상복구</label>
+                        </div>
+                        <div class="business-type-item">
+                            <input type="checkbox" id="biz5" value="demolition">
+                            <label for="biz5">구조물 해체</label>
+                        </div>
+                        <div class="business-type-item">
+                            <input type="checkbox" id="biz6" value="scrap">
+                            <label for="biz6">고철/스크랩</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group full" style="margin-top:20px;">
+                    <label class="form-label">실사 가능 인력 (대략)</label>
+                    <select class="form-select" id="pWorkers">
+                        <option value="">선택하세요</option>
+                        <option value="1-3">1~3명</option>
+                        <option value="4-7">4~7명</option>
+                        <option value="8-15">8~15명</option>
+                        <option value="16+">16명 이상</option>
+                    </select>
+                </div>
+
+                <div class="form-group full" style="margin-top:20px;">
+                    <label class="form-label">사업자등록증 첨부</label>
+                    <div class="file-upload" onclick="document.getElementById('pFile').click()">
+                        <div class="upload-icon">📎</div>
+                        <p>클릭하여 파일을 선택하세요</p>
+                        <p class="upload-hint">PDF, JPG, PNG (최대 10MB)</p>
+                    </div>
+                    <input type="file" id="pFile" style="display:none;" accept=".pdf,.jpg,.jpeg,.png">
+                </div>
+
+                <div class="form-group full" style="margin-top:20px;">
+                    <label class="form-label">업체 소개 (선택)</label>
+                    <textarea class="form-textarea" id="pIntro" placeholder="업체 소개, 주요 시공 경력, 보유 장비 등을 자유롭게 입력해 주세요"></textarea>
+                </div>
+
+                <div class="agreement-box">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="pAgree1" required>
+                        <label for="pAgree1"><strong>[필수]</strong> 개인정보 수집 및 이용에 동의합니다. <a href="privacy.html">개인정보처리방침</a></label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="pAgree2" required>
+                        <label for="pAgree2"><strong>[필수]</strong> 제3자(네모맨·공간f5) 제공에 동의합니다.</label>
+                    </div>
+                </div>
+
+                <div class="submit-actions">
+                    <button class="btn btn-primary btn-lg" onclick="submitPartner()">협력사 신청하기</button>
+                </div>
+            </div>
+
+            <!-- Complete Message -->
+            <div class="partner-form-container complete-message" id="completeMessage">
+                <div class="complete-icon">✓</div>
+                <h3>신청이 완료되었습니다!</h3>
+                <p>영업일 기준 3일 이내에 담당자가 연락을 드립니다.<br>입점 심사 후 계약 절차를 안내해 드리겠습니다.</p>
+                <div style="margin-top:32px;">
+                    <a href="index.html" class="btn btn-primary">홈으로 가기</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-icon">F5</div>
+                        <div>공간f5 <span>·</span> 네모맨</div>
+                    </div>
+                    <p>폐업 소상공인을 위한 철거 매칭 + 정부지원 안내 플랫폼.<br>비움에도 기술이 있습니다.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>서비스</h4>
+                    <a href="support.html">정부지원 안내</a>
+                    <a href="estimate.html">간편견적</a>
+                    <a href="cases.html">시공사례</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+                <div class="footer-col">
+                    <h4>파트너</h4>
+                    <a href="partner.html">협력사 모집</a>
+                    <a href="#">공간f5 인테리어</a>
+                </div>
+                <div class="footer-col">
+                    <h4>고객센터</h4>
+                    <a href="tel:010-0000-0000">010-0000-0000</a>
+                    <a href="#">운영시간: 평일 09:00 ~ 18:00</a>
+                    <a href="terms.html">이용약관</a>
+                    <a href="privacy.html">개인정보처리방침</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>상호: 공간f5 | 대표: (준비중) | 사업자등록번호: (준비중) | 주소: (준비중)</div>
+                <div>© 2026 공간f5 · 네모맨. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== FLOATING CTA ===== -->
+    <div class="floating-cta">
+        <a href="estimate.html" class="floating-btn primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <span class="tooltip">간편견적</span>
+        </a>
+        <a href="partner.html" class="floating-btn accent">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span class="tooltip">협력사 입점</span>
+        </a>
+        <a href="tel:010-0000-0000" class="floating-btn phone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span class="tooltip">전화상담</span>
+        </a>
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        }
+
+        function submitPartner() {
+            const name = document.getElementById('pName').value;
+            const manager = document.getElementById('pManager').value;
+            const phone = document.getElementById('pPhone').value;
+            const region = document.getElementById('pRegion').value;
+            const agree1 = document.getElementById('pAgree1').checked;
+            const agree2 = document.getElementById('pAgree2').checked;
+
+            if (!name || !manager || !phone || !region) {
+                alert('필수 항목을 모두 입력해 주세요.');
+                return;
+            }
+
+            if (!agree1 || !agree2) {
+                alert('필수 동의 항목에 체크해 주세요.');
+                return;
+            }
+
+            // Show completion
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('completeMessage').classList.add('show');
+        }
+
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 2px 20px rgba(20,24,58,0.08)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -73,6 +73,12 @@
       "accessCount": 1,
       "lastAccessed": 1784785161876,
       "type": "file"
+    },
+    {
+      "path": "variant-a.html",
+      "accessCount": 1,
+      "lastAccessed": 1784785645709,
+      "type": "file"
     }
   ],
   "userDirectives": []
