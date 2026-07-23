@@ -57,10 +57,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
   padding:14px 24px;border-radius:999px;font-weight:800;font-size:1rem;
-  transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  transition:transform .18s cubic-bezier(.2,.8,.2,1), box-shadow .18s ease, background .15s ease;
   white-space:nowrap;
 }
-.btn:active{transform:translateY(1px)}
+.btn:active{transform:scale(.97);transition-duration:.1s}
 .btn-primary{background:var(--blue);color:#fff;box-shadow:var(--shadow-blue)}
 .btn-primary:hover{background:var(--blue-dark)}
 .btn-accent{background:var(--yellow);color:var(--ink);box-shadow:0 8px 22px rgba(245,179,1,.35)}
@@ -74,11 +74,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 
 /* =================== HEADER =================== */
 .header{
-  position:sticky;top:0;z-index:50;background:rgba(246,246,244,.86);
-  backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid transparent;
+  position:sticky;top:0;z-index:50;background:rgba(246,246,244,.72);
+  backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid transparent;
   transition:border-color .2s, box-shadow .2s, background .2s;
 }
-.header.scrolled{border-color:var(--line);box-shadow:0 4px 20px rgba(20,24,58,.05);background:rgba(255,255,255,.9)}
+.header.scrolled{border-color:rgba(232,232,236,.7);box-shadow:0 6px 24px rgba(20,24,58,.06);background:rgba(255,255,255,.7)}
 .header .container{display:flex;align-items:center;gap:20px;height:70px}
 .brand{display:flex;align-items:center;gap:10px}
 .brand-mark{
@@ -107,7 +108,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 }
 .hero .container{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;
   gap:40px;align-items:center;padding-top:56px;padding-bottom:64px}
-.hero-copy h1{font-size:clamp(2.05rem,5vw,3.15rem);font-weight:900;margin:18px 0 0}
+.hero-copy h1{font-size:clamp(2.05rem,5vw,3.15rem);font-weight:900;margin:18px 0 0;
+  line-height:1.14;letter-spacing:-.035em;font-optical-sizing:auto}
 .hero-copy h1 .hl{color:var(--blue)}
 .slogan-tag{
   display:inline-block;margin-top:18px;font-weight:800;color:var(--ink);
@@ -292,8 +294,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 /* =================== FLOATING CTA =================== */
 .floating{position:fixed;right:22px;bottom:26px;z-index:40;display:flex;flex-direction:column;gap:10px}
 .fab{width:auto;padding:12px 18px;border-radius:999px;font-weight:800;font-size:.92rem;color:#fff;
-  box-shadow:var(--shadow-md);display:inline-flex;align-items:center;gap:8px;transition:transform .15s}
+  box-shadow:var(--shadow-md);display:inline-flex;align-items:center;gap:8px;transition:transform .18s cubic-bezier(.2,.8,.2,1)}
 .fab:hover{transform:translateY(-2px)}
+.fab:active{transform:scale(.95);transition-duration:.1s}
 .fab-quote{background:var(--yellow);color:var(--ink)}
 .fab-partner{background:#fff;color:var(--ink);border:1px solid var(--line)}
 .fab-tel{background:var(--blue)}
@@ -318,6 +321,27 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   .why-grid,.case-grid{grid-template-columns:1fr}
   .step-arrow{display:none}
 }
+/* =================== ACCESSIBILITY (Apple design) =================== */
+/* 모션 최소화: 스프링/이동을 짧은 페이드로 대체, 오버슈트·오실레이션 제거 */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;scroll-behavior:auto !important;
+  }
+  .hero-blob{animation:none}
+  .btn:active,.fab:active{transform:none}
+}
+/* 투명도 최소화: 블러 제거하고 배경 불투명하게 */
+@media (prefers-reduced-transparency: reduce){
+  .header{background:var(--bg);backdrop-filter:none;-webkit-backdrop-filter:none}
+  .header.scrolled{background:var(--white)}
+}
+/* 고대비: 테두리 강조 */
+@media (prefers-contrast: more){
+  .btn-ghost,.svc-card,.step,.why-card,.faq-item,.pain-card,.case-card{border-color:var(--ink-2)}
+  .nav a{color:var(--ink)}
+}
+
 @media (max-width:560px){
   .section{padding:60px 0}
   .calc-row{grid-template-columns:1fr}

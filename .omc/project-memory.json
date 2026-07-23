@@ -1,0 +1,79 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1784784751063,
+  "projectRoot": "/Users/odada/github/nemoman",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "assets",
+      "docs"
+    ],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "assets": {
+      "path": "assets",
+      "purpose": "Static assets",
+      "fileCount": 7,
+      "lastAccessed": 1784784751057,
+      "keyFiles": [
+        "nemoman.png",
+        "nm_excavator.png",
+        "nm_hero_wall.png",
+        "nm_pose_clip.png",
+        "nm_pose_thumbs.png"
+      ]
+    },
+    "docs": {
+      "path": "docs",
+      "purpose": "Documentation",
+      "fileCount": 4,
+      "lastAccessed": 1784784751057,
+      "keyFiles": [
+        "기획서.md",
+        "디자인브리프.md",
+        "사이트맵.md",
+        "작업계획.md"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "styles.css",
+      "accessCount": 6,
+      "lastAccessed": 1784785313195,
+      "type": "file"
+    },
+    {
+      "path": "index.html",
+      "accessCount": 1,
+      "lastAccessed": 1784785161876,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
