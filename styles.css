@@ -56,12 +56,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 /* buttons */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  padding:14px 24px;border-radius:999px;font-weight:800;font-size:1rem;
+  padding:8px 24px;border-radius:999px;font-weight:800;font-size:1rem;
   transition:transform .18s cubic-bezier(.2,.8,.2,1), box-shadow .18s ease, background .15s ease;
   white-space:nowrap;
 }
 .btn:active{transform:scale(.97);transition-duration:.1s}
-.btn-primary{background:var(--blue);color:#fff;box-shadow:var(--shadow-blue)}
+.btn-primary{background:var(--blue);color:#fff;}
 .btn-primary:hover{background:var(--blue-dark)}
 .btn-accent{background:var(--yellow);color:var(--ink);box-shadow:0 8px 22px rgba(245,179,1,.35)}
 .btn-accent:hover{background:var(--yellow-dark)}
@@ -86,8 +86,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   width:38px;height:38px;border-radius:11px;background:var(--blue);
   display:grid;place-items:center;box-shadow:var(--shadow-blue);flex:none;
 }
-.brand-name{display:flex;flex-direction:column;line-height:1.05}
-.brand-name b{font-size:1.18rem;font-weight:900}
+.brand-name{display:flex;flex-direction:column;line-height:1.05; font-size:1.3rem;font-weight:900}
 .brand-name small{font-size:.68rem;color:var(--ink-3);font-weight:700;letter-spacing:.02em}
 .nav{display:flex;align-items:center;gap:4px;margin-left:12px}
 .nav a{padding:9px 14px;border-radius:10px;font-weight:700;color:var(--ink-2);font-size:.97rem}
@@ -107,16 +106,16 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     radial-gradient(760px 420px at 10% 110%, #FFF7E2, transparent 60%);
 }
 .hero .container{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;
-  gap:40px;align-items:center;padding-top:56px;padding-bottom:64px}
+  gap:40px;align-items:end;padding-top:56px;padding-bottom:64px}
 .hero-copy h1{font-size:clamp(2.05rem,5vw,3.15rem);font-weight:900;margin:18px 0 0;
-  line-height:1.14;letter-spacing:-.035em;font-optical-sizing:auto}
+  font-optical-sizing:auto}
 .hero-copy h1 .hl{color:var(--blue)}
 .slogan-tag{
   display:inline-block;margin-top:18px;font-weight:800;color:var(--ink);
   background:linear-gradient(transparent 58%, #FCE39A 58%);padding:0 4px;
 }
 .hero-copy .sub{margin-top:18px;color:var(--ink-2);font-size:1.08rem;max-width:520px}
-.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:100px}
 .hero-trust{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:24px;color:var(--ink-2);font-size:.92rem;font-weight:600}
 .hero-trust b{color:var(--ink)}
 .hero-trust .dot{color:var(--blue)}
@@ -127,9 +126,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   animation:blob 12s ease-in-out infinite;
 }
 @keyframes blob{50%{border-radius:55% 45% 42% 58%/56% 52% 48% 44%}}
-.hero-visual img{position:relative;width:min(430px,100%);filter:drop-shadow(0 24px 30px rgba(20,24,58,.16))}
+.hero-visual img{position:relative;}
 .hero-badge-float{
-  position:absolute;right:2%;top:12%;background:#fff;border:1px solid var(--line);
+  position:absolute;right:-8%;top:-12%;background:#fff;border:1px solid var(--line);
   box-shadow:var(--shadow-md);border-radius:14px;padding:10px 14px;font-weight:800;font-size:.9rem;
   display:flex;align-items:center;gap:8px;
 }
