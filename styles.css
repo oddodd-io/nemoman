@@ -157,12 +157,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .gov{background:linear-gradient(135deg,var(--blue),#3E5BE6);color:#fff;position:relative;overflow:hidden}
 .gov::after{content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;
   border-radius:50%;background:rgba(255,255,255,.06)}
-.gov .container{position:relative;display:grid;grid-template-columns:1.3fr .7fr;gap:36px;align-items:center}
+.gov .container{position:relative;}
 .gov .eyebrow{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.25);color:#fff}
 .gov h2{font-size:clamp(1.7rem,3.6vw,2.5rem);margin-top:16px}
 .gov h2 .amount{color:var(--yellow)}
-.gov p{margin-top:14px;color:rgba(255,255,255,.9);max-width:560px}
-.gov .gov-cta{margin-top:80px;display:flex;gap:12px;flex-wrap:wrap}
+.gov p{margin-top:34px;color:rgba(255,255,255,.9);}
+.gov .gov-cta{display:flex;gap:12px;flex-wrap:wrap; position:absolute; top: 62px; right: 0;}
 .gov .note{margin-top:16px;font-size:.8rem;color:rgba(255,255,255,.7)}
 .gov-visual{display:grid;place-items:center}
 .gov-visual img{width:200px;filter:drop-shadow(0 16px 20px rgba(0,0,0,.2))}
