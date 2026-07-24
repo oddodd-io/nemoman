@@ -49,7 +49,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   background:var(--blue-050);border:1px solid var(--blue-100);
   padding:6px 13px;border-radius:999px;letter-spacing:0;
 }
-.sec-head{max-width:660px;margin:0 auto 44px;text-align:center}
+.sec-head{max-width:660px;margin:0 auto 64px;text-align:center}
 .sec-head h2{font-size:clamp(1.6rem,3.4vw,2.35rem);margin-top:16px}
 .sec-head p{color:var(--ink-2);margin-top:14px;font-size:1.03rem}
 
@@ -63,7 +63,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .btn:active{transform:scale(.97);transition-duration:.1s}
 .btn-primary{background:var(--blue);color:#fff;}
 .btn-primary:hover{background:var(--blue-dark)}
-.btn-accent{background:var(--yellow);color:var(--ink);box-shadow:0 8px 22px rgba(245,179,1,.35)}
+.btn-accent{background:var(--yellow);color:var(--ink);}
 .btn-accent:hover{background:var(--yellow-dark)}
 .btn-ghost{background:transparent;color:var(--ink);border:1.6px solid var(--line)}
 .btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
@@ -91,22 +91,22 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .nav{display:flex;align-items:center;gap:4px;margin-left:12px}
 .nav a{padding:9px 14px;border-radius:10px;font-weight:700;color:var(--ink-2);font-size:.97rem}
 .nav a:hover{color:var(--ink);background:var(--blue-050)}
-.header-actions{margin-left:auto;display:flex;align-items:center;gap:12px}
+.header-actions{margin-left:auto;display:flex;align-items:center;gap:24px}
 .tel-link{display:inline-flex;align-items:center;gap:7px;font-weight:800;color:var(--ink)}
 .tel-link .num{font-size:1.02rem}
 .hamburger{display:none;width:44px;height:44px;border-radius:11px;border:1px solid var(--line);background:#fff}
 .hamburger span{display:block;width:20px;height:2px;background:var(--ink);margin:4px auto;border-radius:2px;transition:.2s}
 
+/* ========= AMBIENT BACKGROUND (뷰포트 고정 · 섹션에 잘리지 않음) ========= */
+.bg-wrap{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.bg-wrap::before,.bg-wrap::after{content:"";position:absolute;inset:0}
+.bg-wrap::before{background:radial-gradient(1100px 480px at 78% -10%, var(--blue-050), transparent 60%)}
+.bg-wrap::after{background:radial-gradient(760px 420px at 10% 100%, #FFF7E2, transparent 60%)}
+
 /* =================== HERO =================== */
-.hero{position:relative;overflow:hidden}
-.hero::before{
-  content:"";position:absolute;inset:0;z-index:0;
-  background:
-    radial-gradient(1100px 480px at 78% -10%, var(--blue-050), transparent 60%),
-    radial-gradient(760px 420px at 10% 110%, #FFF7E2, transparent 60%);
-}
+.hero{position:relative}
 .hero .container{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;
-  gap:40px;align-items:end;padding-top:56px;padding-bottom:64px}
+  gap:40px;align-items:end;padding-top:100px;padding-bottom:100px}
 .hero-copy h1{font-size:clamp(2.05rem,5vw,3.15rem);font-weight:900;margin:18px 0 0;
   font-optical-sizing:auto}
 .hero-copy h1 .hl{color:var(--blue)}
@@ -126,7 +126,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   animation:blob 12s ease-in-out infinite;
 }
 @keyframes blob{50%{border-radius:55% 45% 42% 58%/56% 52% 48% 44%}}
-.hero-visual img{position:relative;}
+.hero-visual img{position:relative; margin-right: -100px;}
 .hero-badge-float{
   position:absolute;right:-8%;top:-12%;background:#fff;border:1px solid var(--line);
   box-shadow:var(--shadow-md);border-radius:14px;padding:10px 14px;font-weight:800;font-size:.9rem;
@@ -162,7 +162,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .gov h2{font-size:clamp(1.7rem,3.6vw,2.5rem);margin-top:16px}
 .gov h2 .amount{color:var(--yellow)}
 .gov p{margin-top:14px;color:rgba(255,255,255,.9);max-width:560px}
-.gov .gov-cta{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+.gov .gov-cta{margin-top:80px;display:flex;gap:12px;flex-wrap:wrap}
 .gov .note{margin-top:16px;font-size:.8rem;color:rgba(255,255,255,.7)}
 .gov-visual{display:grid;place-items:center}
 .gov-visual img{width:200px;filter:drop-shadow(0 16px 20px rgba(0,0,0,.2))}
