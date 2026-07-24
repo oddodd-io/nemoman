@@ -71,6 +71,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .btn-white:hover{background:#f0f3ff}
 .btn-lg{padding:16px 30px;font-size:1.06rem}
 .btn-block{width:100%}
+/* 인라인 라인 아이콘 (버튼·전화링크 공통) */
+.ico{width:1.05em;height:1.05em;flex:none;vertical-align:-.15em}
 
 /* =================== HEADER =================== */
 .header{
@@ -162,7 +164,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .gov h2{font-size:clamp(1.7rem,3.6vw,2.5rem);margin-top:16px}
 .gov h2 .amount{color:var(--yellow)}
 .gov p{margin-top:34px;color:rgba(255,255,255,.9);}
-.gov .gov-cta{display:flex;gap:12px;flex-wrap:wrap; position:absolute; top: 62px; right: 0;}
+.gov .gov-cta{display:flex;gap:12px;flex-wrap:wrap; position:absolute; top: 80px; right: 0;}
 .gov .note{margin-top:16px;font-size:.8rem;color:rgba(255,255,255,.7)}
 .gov-visual{display:grid;place-items:center}
 .gov-visual img{width:200px;filter:drop-shadow(0 16px 20px rgba(0,0,0,.2))}
@@ -195,7 +197,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .services{background:var(--bg)}
 .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .svc-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);
-  padding:28px 22px;transition:transform .15s, box-shadow .15s}
+  padding:28px 22px;transition:transform .15s, box-shadow .15s; text-align: center;}
 .svc-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
 .svc-ic{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:1.5rem;
   background:var(--blue-050);margin-bottom:16px}
@@ -236,8 +238,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .why-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;
   display:flex;gap:16px;align-items:flex-start}
-.why-ic{width:44px;height:44px;border-radius:12px;background:var(--blue);color:#fff;flex:none;
-  display:grid;place-items:center;font-size:1.2rem}
+.why-ic{width:52px;height:52px;border-radius:14px;background:var(--blue-050);color:var(--blue);flex:none;
+  display:grid;place-items:center}
+.why-ic svg{width:26px;height:26px}
 .why-card h3{font-size:1.08rem}
 .why-card p{margin-top:6px;color:var(--ink-2);font-size:.93rem}
 
@@ -297,6 +300,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .floating{position:fixed;right:22px;bottom:26px;z-index:40;display:flex;flex-direction:column;gap:10px}
 .fab{width:auto;padding:12px 18px;border-radius:999px;font-weight:800;font-size:.92rem;color:#fff;
   box-shadow:var(--shadow-md);display:inline-flex;align-items:center;gap:8px;transition:transform .18s cubic-bezier(.2,.8,.2,1)}
+.fab svg{width:18px;height:18px;flex:none}
 .fab:hover{transform:translateY(-2px)}
 .fab:active{transform:scale(.95);transition-duration:.1s}
 .fab-quote{background:var(--yellow);color:var(--ink)}
