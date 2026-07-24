@@ -317,11 +317,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   .nav.open{display:flex;position:absolute;top:70px;left:0;right:0;flex-direction:column;
     background:#fff;border-bottom:1px solid var(--line);padding:12px;gap:4px;box-shadow:var(--shadow-md)}
   .nav.open a{padding:13px 16px}
-  .hero .container{grid-template-columns:1fr;text-align:center;padding-top:40px}
+  .hero .container{grid-template-columns:1fr;text-align:center;padding:60px}
   .hero-copy .sub{margin-left:auto;margin-right:auto}
   .hero-cta,.hero-trust{justify-content:center; margin-top:40px}
   /* 모바일: 텍스트 먼저, 캐릭터는 아래·작게 */
-  .hero-visual{order:1;margin-top:28px}
+  .hero-visual{order:1;margin-top:28px;display:none}
   .hero-visual img{width:240px;max-width:66%;margin:0}
   .gov .container,.bridge .container{grid-template-columns:1fr;text-align:center}
   .gov p,.bridge p{margin-left:auto;margin-right:auto;margin-top:14px}
