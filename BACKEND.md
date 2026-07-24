@@ -40,11 +40,16 @@
 npm i -g wrangler
 wrangler login
 
-# 1) D1 생성 → 출력된 database_id 를 wrangler.toml 에 붙여넣기
+# 1) D1 생성 (대시보드 Storage & databases → D1 → Create 로 만들어도 됨)
 wrangler d1 create nemoman-db
 
 # 2) 테이블 생성 (원격)
 wrangler d1 execute nemoman-db --remote --file=schema.sql
+
+# 3) D1을 Pages에 바인딩 (대시보드)
+#    Pages → nemoman → Settings → Functions → D1 database bindings
+#      Variable name: DB   /   D1 database: nemoman-db
+#    ※ wrangler.toml 에 database_id 를 넣지 않습니다 (대시보드 바인딩 사용)
 
 # 3) Pages 프로젝트에 비밀값 등록
 wrangler pages secret put SOLAPI_API_KEY

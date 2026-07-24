@@ -4,14 +4,15 @@ name = "nemoman"
 compatibility_date = "2026-01-01"
 pages_build_output_dir = "."
 
-# D1 데이터베이스 바인딩 (코드에서 env.DB 로 접근)
-# database_id 는 `wrangler d1 create nemoman-db` 실행 후 출력값으로 채우세요.
-[[d1_databases]]
-binding = "DB"
-database_name = "nemoman-db"
-database_id = "PUT-YOUR-D1-DATABASE-ID-HERE"
-
-# 비밀값(SOLAPI_API_KEY / SOLAPI_API_SECRET / OWNER_PHONE / SENDER_PHONE / TURNSTILE_SECRET)은
-# 코드·설정에 넣지 말고 아래 중 하나로 등록하세요.
-#   · Cloudflare 대시보드 → Pages → 프로젝트 → Settings → Environment variables (Secret)
-#   · 또는 CLI: wrangler pages secret put SOLAPI_API_KEY
+# D1과 비밀값은 코드/설정에 넣지 않고 "대시보드"에서 연결합니다.
+#
+# 1) D1 바인딩
+#    Pages → 프로젝트(nemoman) → Settings → Functions → D1 database bindings
+#      · Variable name : DB
+#      · D1 database    : nemoman-db  (먼저 Storage & databases → D1 에서 생성)
+#
+# 2) 비밀값 (Settings → Environment variables → Add, "Encrypt" 체크)
+#      SOLAPI_API_KEY / SOLAPI_API_SECRET / OWNER_PHONE / SENDER_PHONE / ADMIN_PASSWORD
+#      (선택) TURNSTILE_SECRET
+#
+# 위 항목은 코드에서 env.DB / env.ADMIN_PASSWORD 처럼 자동 주입됩니다.
