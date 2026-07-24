@@ -322,8 +322,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   .hero-cta,.hero-trust{justify-content:center}
   .hero-visual{order:-1;margin-bottom:8px}
   .gov .container,.bridge .container{grid-template-columns:1fr;text-align:center}
-  .gov p,.bridge p{margin-left:auto;margin-right:auto}
-  .gov .gov-cta,.f5-eq{justify-content:center}
+  .gov p,.bridge p{margin-left:auto;margin-right:auto;margin-top:14px}
+  /* 데스크톱 절대배치 해제 → 모바일에선 정상 흐름으로 아래에 쌓기 */
+  .gov .gov-cta{position:static;justify-content:center;margin-top:24px}
+  .f5-eq{justify-content:center}
   .gov-visual,.bridge-visual{display:none}
   .pain-grid,.svc-grid{grid-template-columns:repeat(2,1fr)}
   .why-grid,.case-grid{grid-template-columns:1fr}
