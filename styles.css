@@ -39,7 +39,7 @@ ul{margin:0;padding:0;list-style:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 
 .container{max-width:var(--container);margin:0 auto;padding:0 20px}
-.section{padding:88px 0}
+.section{padding:100px 0}
 .section--tight{padding:64px 0}
 
 /* eyebrow + section head */
