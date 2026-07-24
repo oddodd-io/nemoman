@@ -1,0 +1,17 @@
+# Cloudflare Pages + Functions 설정
+# 정적 사이트(루트)를 Pages로 배포하고, /functions/**를 서버리스 API로 실행합니다.
+name = "nemoman"
+compatibility_date = "2026-01-01"
+pages_build_output_dir = "."
+
+# D1 데이터베이스 바인딩 (코드에서 env.DB 로 접근)
+# database_id 는 `wrangler d1 create nemoman-db` 실행 후 출력값으로 채우세요.
+[[d1_databases]]
+binding = "DB"
+database_name = "nemoman-db"
+database_id = "PUT-YOUR-D1-DATABASE-ID-HERE"
+
+# 비밀값(SOLAPI_API_KEY / SOLAPI_API_SECRET / OWNER_PHONE / SENDER_PHONE / TURNSTILE_SECRET)은
+# 코드·설정에 넣지 말고 아래 중 하나로 등록하세요.
+#   · Cloudflare 대시보드 → Pages → 프로젝트 → Settings → Environment variables (Secret)
+#   · 또는 CLI: wrangler pages secret put SOLAPI_API_KEY

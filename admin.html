@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>견적 관리자 | 네모맨 철거</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232A4CDB'/%3E%3Crect x='6' y='6' width='9' height='9' rx='2' fill='none' stroke='white' stroke-width='2'/%3E%3Crect x='11' y='11' width='8' height='8' rx='2' fill='white'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="styles.css">
+<style>
+  body{background:var(--bg)}
+  .adm-wrap{max-width:1120px;margin:0 auto;padding:28px 20px 80px}
+  .adm-top{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+  .adm-top h1{font-size:1.4rem;font-weight:900;letter-spacing:-.02em}
+  .adm-top .count{color:var(--ink-2);font-weight:700;font-size:.92rem}
+  .adm-top .sp{margin-left:auto}
+
+  /* 로그인 */
+  .login{max-width:360px;margin:12vh auto 0;background:#fff;border:1px solid var(--line);
+    border-radius:18px;padding:32px;box-shadow:var(--shadow-md);text-align:center}
+  .login h2{font-size:1.2rem;font-weight:900;margin-bottom:6px}
+  .login p{color:var(--ink-2);font-size:.9rem;margin-bottom:20px}
+  .login input{width:100%;padding:13px 14px;border:1.6px solid var(--line);border-radius:12px;
+    font-family:inherit;font-size:1rem;margin-bottom:12px}
+  .login input:focus{outline:none;border-color:var(--blue)}
+  .login .err{color:#E5484D;font-size:.85rem;font-weight:700;margin-bottom:12px;display:none}
+
+  /* 테이블 */
+  .table-box{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    box-shadow:var(--shadow-sm)}
+  .table-scroll{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:.88rem;white-space:nowrap}
+  th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line)}
+  th{background:var(--blue-050);color:var(--ink);font-weight:800;font-size:.82rem;position:sticky;top:0}
+  tbody tr:hover{background:var(--blue-050)}
+  td .amt{color:var(--blue);font-weight:800}
+  td.wrap{white-space:normal;min-width:180px;color:var(--ink-2)}
+  .badge{display:inline-block;background:var(--blue-050);color:var(--blue);border:1px solid var(--blue-100);
+    border-radius:999px;padding:2px 9px;font-size:.76rem;font-weight:700}
+  .empty{padding:60px 20px;text-align:center;color:var(--ink-3);font-weight:600}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+
+<!-- 로그인 -->
+<div class="login" id="login">
+  <h2>견적 관리자</h2>
+  <p>비밀번호를 입력하세요.</p>
+  <input type="password" id="pw" placeholder="관리자 비밀번호" autocomplete="current-password">
+  <div class="err" id="loginErr">비밀번호가 올바르지 않습니다.</div>
+  <button class="btn btn-primary btn-block" id="loginBtn">로그인</button>
+</div>
+
+<!-- 관리자 화면 -->
+<div class="adm-wrap hidden" id="app">
+  <div class="adm-top">
+    <h1>견적 신청 목록</h1>
+    <span class="count" id="count"></span>
+    <span class="sp"></span>
+    <button class="btn btn-ghost" id="reloadBtn">새로고침</button>
+    <button class="btn btn-ghost" id="logoutBtn">로그아웃</button>
+  </div>
+  <div class="table-box">
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>접수일시</th><th>이름</th><th>연락처</th><th>지역</th>
+            <th>건물</th><th>업종</th><th>평수</th><th>범위</th>
+            <th>예상견적</th><th>인테리어</th><th>희망일</th><th>요청사항</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <div class="empty hidden" id="empty">아직 접수된 견적이 없습니다.</div>
+  </div>
+</div>
+
+<script>
+  const TYPE = { store:'상가/점포', office:'사무실', factory:'공장', house:'주택' };
+  const CAT  = { food:'음식점', retail:'소매점', service:'서비스업', office:'사무실', other:'기타' };
+  const SCOPE= { partial:'부분', full:'전체' };
+  const INT  = { yes:'계획있음', no:'철거만', maybe:'고민중' };
+
+  const $ = id => document.getElementById(id);
+  const KEY = 'nm_admin_auth';
+  const esc = s => (s==null?'':String(s)).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  function authHeader(){ return sessionStorage.getItem(KEY); }
+
+  async function load(){
+    const auth = authHeader();
+    if(!auth){ showLogin(); return; }
+    let res;
+    try {
+      res = await fetch('/api/admin/estimates', { headers: { Authorization: auth } });
+    } catch { alert('서버에 연결할 수 없습니다.'); return; }
+    if(res.status === 401){ sessionStorage.removeItem(KEY); showLogin(true); return; }
+    const out = await res.json().catch(()=>({}));
+    if(!res.ok || !out.ok){ alert(out.error || '조회 실패'); return; }
+    render(out.rows || []);
+    $('login').classList.add('hidden');
+    $('app').classList.remove('hidden');
+  }
+
+  function render(rows){
+    $('count').textContent = '총 ' + rows.length + '건';
+    $('empty').classList.toggle('hidden', rows.length > 0);
+    $('rows').innerHTML = rows.map(r => {
+      const dt = r.created_at ? new Date(r.created_at).toLocaleString('ko-KR', { hour12:false }) : '-';
+      const amt = (r.est_min!=null) ? `<span class="amt">${Number(r.est_min).toLocaleString()}~${Number(r.est_max).toLocaleString()}만원</span>` : '-';
+      const tel = r.phone ? `<a href="tel:${esc(r.phone).replace(/\D/g,'')}">${esc(r.phone)}</a>` : '-';
+      return `<tr>
+        <td>${esc(dt)}</td>
+        <td><b>${esc(r.name)}</b></td>
+        <td>${tel}</td>
+        <td>${esc(r.region)}</td>
+        <td>${esc(TYPE[r.building_type]||r.building_type||'-')}</td>
+        <td>${esc(CAT[r.category]||r.category||'-')}</td>
+        <td>${r.size!=null?esc(r.size)+'평':'-'}</td>
+        <td>${esc(SCOPE[r.scope]||r.scope||'-')}</td>
+        <td>${amt}</td>
+        <td>${r.interior?`<span class="badge">${esc(INT[r.interior]||r.interior)}</span>`:'-'}</td>
+        <td>${esc(r.wish_date||'-')}</td>
+        <td class="wrap">${esc(r.memo||'')}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  function showLogin(isErr){
+    $('app').classList.add('hidden');
+    $('login').classList.remove('hidden');
+    $('loginErr').style.display = isErr ? 'block' : 'none';
+    $('pw').focus();
+  }
+
+  async function doLogin(){
+    const pw = $('pw').value;
+    if(!pw) return;
+    const auth = 'Basic ' + btoa('admin:' + pw);
+    const res = await fetch('/api/admin/estimates?limit=1', { headers: { Authorization: auth } }).catch(()=>null);
+    if(res && res.ok){
+      sessionStorage.setItem(KEY, auth);
+      $('pw').value = '';
+      load();
+    } else {
+      $('loginErr').style.display = 'block';
+    }
+  }
+
+  $('loginBtn').addEventListener('click', doLogin);
+  $('pw').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+  $('reloadBtn').addEventListener('click', load);
+  $('logoutBtn').addEventListener('click', () => { sessionStorage.removeItem(KEY); showLogin(); });
+
+  // 세션에 인증정보가 있으면 바로 로드
+  load();
+</script>
+</body>
+</html>

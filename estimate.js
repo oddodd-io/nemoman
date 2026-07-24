@@ -99,16 +99,32 @@ function goToStep(step) {
   document.querySelector('.calc-card').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
 }
 
-function submitEstimate() {
+async function submitEstimate() {
   if (!markInvalid(['estName', 'estPhone', 'estRegion'])) return;
   if (!estAgree.checked) { estAgree.closest('.agree').classList.add('err'); estAgree.focus(); return; }
 
-  // TODO: 실제 전송 연동 지점 — payload를 서버/폼서비스(Formspree 등)로 전송
   const payload = {
     ...calcData, estimate: estResult, name: estName.value, phone: estPhone.value,
     region: estRegion.value, date: estDate.value, memo: estMemo.value, interior: estInterior.value
   };
-  console.log('견적 신청 payload', payload);
+
+  const label = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = '전송 중…';
+  try {
+    const res = await fetch('/api/estimate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const out = await res.json().catch(() => ({}));
+    if (!res.ok || !out.ok) throw new Error(out.error || '전송에 실패했습니다.');
+  } catch (e) {
+    submitBtn.disabled = false;
+    submitBtn.textContent = label;
+    alert((e && e.message ? e.message : '전송에 실패했습니다.') + '\n잠시 후 다시 시도하시거나 전화로 문의해 주세요.');
+    return;
+  }
 
   doneRecap.innerHTML = '<b>' + estName.value + '</b>님, '
     + (estResult ? '예상 견적 ' + won(estResult.min) + '~' + won(estResult.max) + '만원으로 ' : '')
