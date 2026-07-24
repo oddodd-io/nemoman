@@ -355,7 +355,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 @media (max-width:560px){
   .section{padding:60px 0}
   .calc-row{grid-template-columns:1fr}
-  .pain-grid,.svc-grid{grid-template-columns:1fr}
+  .pain-grid{grid-template-columns:1fr}
+  /* 서비스 카드는 모바일에서도 2×2 유지 */
+  .svc-grid{grid-template-columns:repeat(2,1fr);gap:12px}
   .footer .container{grid-template-columns:1fr}
   .final-box{padding:40px 22px}
   .floating{right:12px;bottom:14px}
