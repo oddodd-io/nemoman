@@ -7,3 +7,6 @@ Thumbs.db
 
 # 임시/로그
 *.log
+
+# OMC 내부 상태 (추적 제외)
+.omc/
