@@ -199,7 +199,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .svc-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
 .svc-ic{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:1.5rem;
   background:var(--blue-050);margin-bottom:16px}
-.svc-card h3{font-size:1.15rem}
+.svc-card h3{font-size:1.15rem; margin-top: 24px;}
 .svc-card p{margin-top:8px;color:var(--ink-2);font-size:.95rem}
 
 /* =================== INTERIOR BRIDGE =================== */
