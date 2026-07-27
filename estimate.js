@@ -63,7 +63,7 @@ function calcEstimate() {
 
   const min = Math.round(base * 0.85), max = Math.round(base * 1.15);
   const avg = Math.round((min + max) / 2);
-  const support = Math.min(250, Math.round(avg * 0.6));
+  const support = Math.min(600, Math.round(avg * 0.6));
   const selfPay = Math.max(0, avg - support);
   estResult = { min, max, support, selfPay, factors };
 
