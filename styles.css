@@ -122,13 +122,19 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .hero-trust b{color:var(--ink)}
 .hero-trust .dot{color:var(--blue)}
 .hero-visual{position:relative;display:grid;place-items:center}
+/* 캐릭터 뒤 원형 그라데이션 (og.png와 동일 톤) */
+.hero-visual::before{
+  content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:0;
+  width:min(600px,96%);aspect-ratio:1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side, var(--blue-050), transparent);
+}
 .hero-blob{
   position:absolute;width:86%;aspect-ratio:1;border-radius:42% 58% 55% 45%/48% 44% 56% 52%;
   background:linear-gradient(150deg,var(--blue),#4E6BE8);opacity:.12;
   animation:blob 12s ease-in-out infinite;
 }
 @keyframes blob{50%{border-radius:55% 45% 42% 58%/56% 52% 48% 44%}}
-.hero-visual img{position:relative; margin-right: -100px;}
+.hero-visual img{position:relative;z-index:1; margin-right: -100px;}
 .hero-badge-float{
   position:absolute;right:-8%;top:-12%;background:#fff;border:1px solid var(--line);
   box-shadow:var(--shadow-md);border-radius:14px;padding:10px 14px;font-weight:800;font-size:.9rem;
