@@ -1,8 +1,8 @@
 /* =========================================================
-   견적 목록 조회 API (관리자) — Cloudflare Pages Function
-   GET /api/admin/estimates
+   상담 신청 목록 조회 API (관리자) — Cloudflare Pages Function
+   GET /api/admin/consult
    - Basic 인증(비밀번호: env.ADMIN_PASSWORD)
-   - D1 estimates 최신순 반환
+   - D1 consult_inquiries 최신순 반환 (photos 는 키 배열로 파싱)
    환경변수:
      DB             : D1 바인딩
      ADMIN_PASSWORD : 관리자 비밀번호 (Secret)
@@ -34,11 +34,17 @@ export async function onRequestGet(context) {
   const url = new URL(request.url);
   const limit = Math.min(parseInt(url.searchParams.get('limit') || '200', 10) || 200, 500);
   const { results } = await env.DB
-    .prepare('SELECT * FROM estimates ORDER BY id DESC LIMIT ?')
+    .prepare('SELECT * FROM consult_inquiries ORDER BY id DESC LIMIT ?')
     .bind(limit)
     .all();
 
-  return json({ ok: true, count: results.length, rows: results });
+  const rows = results.map(r => {
+    let photos = [];
+    try { photos = JSON.parse(r.photos || '[]'); } catch { photos = []; }
+    return { ...r, photos: Array.isArray(photos) ? photos : [] };
+  });
+
+  return json({ ok: true, count: rows.length, rows });
 }
 
 // GET 외 메서드 차단

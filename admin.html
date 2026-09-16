@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>견적 관리자 | 네모맨 철거</title>
+<title>관리자 | 네모맨 · 공간F5</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="styles.css">
@@ -40,6 +40,22 @@
     border-radius:999px;padding:2px 9px;font-size:.76rem;font-weight:700}
   .empty{padding:60px 20px;text-align:center;color:var(--ink-3);font-weight:600}
   .hidden{display:none}
+
+  /* 탭 */
+  .tabs{display:flex;gap:6px;padding:5px;background:#fff;border:1px solid var(--line);border-radius:14px;
+    margin-bottom:18px;width:max-content;max-width:100%}
+  .tab{padding:9px 18px;border-radius:10px;font-weight:800;font-size:.92rem;color:var(--ink-2)}
+  .tab.active{background:var(--blue);color:#fff;box-shadow:var(--shadow-sm)}
+
+  /* 상담 신청 · 사진 */
+  .kind{display:inline-block;border-radius:999px;padding:2px 9px;font-size:.76rem;font-weight:800;border:1px solid transparent}
+  .kind-bath{background:var(--blue-050);color:var(--blue);border-color:var(--blue-100)}
+  .kind-demo{background:#FFF4D6;color:#8A5A00;border-color:#FCE39A}
+  .kind-etc{background:#EEF0F3;color:var(--ink-2);border-color:var(--line)}
+  .photos{display:flex;gap:6px;flex-wrap:wrap;min-width:120px}
+  .photos a{display:block;width:56px;height:56px;border-radius:8px;overflow:hidden;background:var(--blue-050);
+    border:1px solid var(--line)}
+  .photos img{width:100%;height:100%;object-fit:cover;display:block}
 </style>
 </head>
 <body>
@@ -56,13 +72,21 @@
 <!-- 관리자 화면 -->
 <div class="adm-wrap hidden" id="app">
   <div class="adm-top">
-    <h1>견적 신청 목록</h1>
+    <h1 id="title">견적 신청 목록</h1>
     <span class="count" id="count"></span>
     <span class="sp"></span>
     <button class="btn btn-ghost" id="reloadBtn">새로고침</button>
     <button class="btn btn-ghost" id="logoutBtn">로그아웃</button>
   </div>
-  <div class="table-box">
+
+  <!-- 탭: 철거 견적 / 상담 신청 -->
+  <div class="tabs" role="tablist">
+    <button class="tab active" data-tab="est" role="tab">철거 견적</button>
+    <button class="tab" data-tab="consult" role="tab">상담 신청</button>
+  </div>
+
+  <!-- 철거 견적 (기존) -->
+  <div class="table-box" id="estBox">
     <div class="table-scroll">
       <table>
         <thead>
@@ -77,6 +101,22 @@
     </div>
     <div class="empty hidden" id="empty">아직 접수된 견적이 없습니다.</div>
   </div>
+
+  <!-- 상담 신청 (consult.html) -->
+  <div class="table-box hidden" id="consultBox">
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>접수일시</th><th>종류</th><th>이름</th><th>연락처</th><th>지역</th>
+            <th>범위</th><th>메모</th><th>유입</th><th>사진</th>
+          </tr>
+        </thead>
+        <tbody id="consultRows"></tbody>
+      </table>
+    </div>
+    <div class="empty hidden" id="consultEmpty">아직 접수된 상담이 없습니다.</div>
+  </div>
 </div>
 
 <script>
@@ -84,6 +124,7 @@
   const CAT  = { food:'음식점', retail:'소매점', service:'서비스업', office:'사무실', other:'기타' };
   const SCOPE= { partial:'부분', full:'전체' };
   const INT  = { yes:'계획있음', no:'철거만', maybe:'고민중' };
+  const KIND = { bath:'욕실·화장실', demo:'점포·상가 철거', etc:'기타 인테리어' };
 
   const $ = id => document.getElementById(id);
   const KEY = 'nm_admin_auth';
@@ -91,19 +132,32 @@
 
   function authHeader(){ return sessionStorage.getItem(KEY); }
 
+  let tab = 'est'; // est | consult
+
   async function load(){
     const auth = authHeader();
     if(!auth){ showLogin(); return; }
+    const api = tab === 'consult' ? '/api/admin/consult' : '/api/admin/estimates';
     let res;
     try {
-      res = await fetch('/api/admin/estimates', { headers: { Authorization: auth } });
+      res = await fetch(api, { headers: { Authorization: auth } });
     } catch { alert('서버에 연결할 수 없습니다.'); return; }
     if(res.status === 401){ sessionStorage.removeItem(KEY); showLogin(true); return; }
     const out = await res.json().catch(()=>({}));
     if(!res.ok || !out.ok){ alert(out.error || '조회 실패'); return; }
-    render(out.rows || []);
+    if(tab === 'consult') renderConsult(out.rows || []);
+    else render(out.rows || []);
     $('login').classList.add('hidden');
     $('app').classList.remove('hidden');
+  }
+
+  function switchTab(next){
+    tab = next;
+    document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.tab === next));
+    $('estBox').classList.toggle('hidden', next !== 'est');
+    $('consultBox').classList.toggle('hidden', next !== 'consult');
+    $('title').textContent = next === 'consult' ? '상담 신청 목록' : '견적 신청 목록';
+    load();
   }
 
   function render(rows){
@@ -130,6 +184,59 @@
     }).join('');
   }
 
+  /* ---------- 상담 신청 표 ---------- */
+  function renderConsult(rows){
+    $('count').textContent = '총 ' + rows.length + '건';
+    $('consultEmpty').classList.toggle('hidden', rows.length > 0);
+    $('consultRows').innerHTML = rows.map(r => {
+      const dt = r.created_at ? new Date(r.created_at).toLocaleString('ko-KR', { hour12:false }) : '-';
+      const tel = r.phone ? `<a href="tel:${esc(r.phone).replace(/\D/g,'')}">${esc(r.phone)}</a>` : '-';
+      const kind = r.kind ? `<span class="kind kind-${esc(r.kind)}">${esc(KIND[r.kind]||r.kind)}</span>` : '-';
+      const photos = Array.isArray(r.photos) ? r.photos : [];
+      const ph = photos.length
+        ? `<div class="photos">${photos.map(k => `<a href="#" data-key="${esc(k)}" title="${esc(k)}"></a>`).join('')}</div>`
+        : '-';
+      return `<tr>
+        <td>${esc(dt)}</td>
+        <td>${kind}</td>
+        <td><b>${esc(r.name||'-')}</b></td>
+        <td>${tel}</td>
+        <td>${esc(r.region)}</td>
+        <td class="wrap">${esc(r.scope||'-')}</td>
+        <td class="wrap">${esc(r.memo||'')}</td>
+        <td>${esc(r.source||'-')}</td>
+        <td>${ph}</td>
+      </tr>`;
+    }).join('');
+    loadThumbs();
+  }
+
+  // <img src>는 Authorization 헤더를 못 보내므로 fetch → blob URL 로 표시
+  const blobCache = new Map();
+  async function fetchPhoto(key){
+    if(blobCache.has(key)) return blobCache.get(key);
+    const res = await fetch('/api/admin/photo/' + key.split('/').map(encodeURIComponent).join('/'),
+      { headers: { Authorization: authHeader() } });
+    if(!res.ok) throw new Error('photo ' + res.status);
+    const url = URL.createObjectURL(await res.blob());
+    blobCache.set(key, url);
+    return url;
+  }
+  function loadThumbs(){
+    document.querySelectorAll('#consultRows .photos a[data-key]').forEach(async a => {
+      try {
+        const url = await fetchPhoto(a.dataset.key);
+        a.innerHTML = `<img src="${url}" alt="">`;
+      } catch { a.textContent = '!'; }
+    });
+  }
+  $('consultRows').addEventListener('click', async e => {
+    const a = e.target.closest('a[data-key]');
+    if(!a) return;
+    e.preventDefault();
+    try { window.open(await fetchPhoto(a.dataset.key), '_blank'); } catch { alert('사진을 불러올 수 없습니다.'); }
+  });
+
   function showLogin(isErr){
     $('app').classList.add('hidden');
     $('login').classList.remove('hidden');
@@ -154,6 +261,7 @@
   $('loginBtn').addEventListener('click', doLogin);
   $('pw').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
   $('reloadBtn').addEventListener('click', load);
+  document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', () => switchTab(b.dataset.tab)));
   $('logoutBtn').addEventListener('click', () => { sessionStorage.removeItem(KEY); showLogin(); });
 
   // 세션에 인증정보가 있으면 바로 로드

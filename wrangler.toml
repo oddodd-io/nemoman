@@ -15,3 +15,9 @@ database_id = "0f4bb34b-4e82-4b11-8b88-3caa3fc95ec2"
 #   Settings → Variables and secrets → Add (Type: Secret)
 #     SOLAPI_API_KEY / SOLAPI_API_SECRET / OWNER_PHONE / SENDER_PHONE / ADMIN_PASSWORD
 #     (선택) TURNSTILE_SECRET
+
+# R2 바인딩 — 상담 신청 사진 저장 (consult.html → /api/consult)
+# 버킷 생성: 대시보드에서 R2 활성화 → wrangler r2 bucket create nemoman-photos → 아래 3줄 주석 해제
+# [[r2_buckets]]
+# binding = "PHOTOS"
+# bucket_name = "nemoman-photos"

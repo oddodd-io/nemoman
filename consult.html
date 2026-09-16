@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>상담 신청 | 공간F5 네모맨</title>
+<meta name="description" content="욕실 시공부터 점포·상가 철거까지, 사진 한 장으로 편하게 상담하세요. 서울·경기 전역 · 공간F5 네모맨.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nemoman.pages.dev/consult.html">
+<!-- Open Graph (링크 공유 미리보기) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nemoman.pages.dev/consult.html">
+<meta property="og:title" content="상담 신청 | 공간F5 네모맨">
+<meta property="og:description" content="욕실 시공부터 점포·상가 철거까지, 사진 한 장으로 편하게 상담하세요. 서울·경기 전역.">
+<meta property="og:image" content="https://nemoman.pages.dev/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="styles.css">
+<style>
+  :root{--green:#1DB954;--green-dark:#169C46;--kakao:#FEE500;--kakao-dark:#F2DA00;--danger:#E5484D}
+  body{background:var(--bg)}
+  .consult-wrap{max-width:720px;margin:0 auto;padding:28px 16px 48px}
+
+  /* 히어로 */
+  .b-hero{position:relative;display:flex;align-items:flex-end;gap:16px;padding:8px 0 22px}
+  .b-hero .copy{flex:1;min-width:0}
+  .b-brand{font-size:.8rem;font-weight:800;color:var(--blue);letter-spacing:.01em}
+  .b-hero h1{font-size:clamp(1.55rem,6.2vw,2.3rem);font-weight:900;margin-top:10px}
+  .b-hero .sub{margin-top:5px;color:var(--ink-2);font-size:.98rem;line-height:1.6}
+  .b-hero .mascot{width:104px;flex:none;align-self:flex-end;filter:drop-shadow(0 6px 14px rgba(20,24,58,.12))}
+  @media (max-width:420px){.b-hero .mascot{width:84px}}
+
+  /* CTA 버튼 3종 */
+  .cta-stack{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+  .cta{display:flex;align-items:center;justify-content:center;gap:10px;border-radius:16px;
+    font-weight:900;text-align:center;transition:transform .15s,filter .15s}
+  .cta:active{transform:scale(.98)}
+  .cta-tel{background:var(--green);color:#fff;padding:18px 18px;font-size:1.12rem;
+    box-shadow:0 10px 26px rgba(29,185,84,.28)}
+  .cta-tel:hover{background:var(--green-dark)}
+  .cta-tel .num{letter-spacing:.01em}
+  .cta-tel .ico,.cta-kakao .ico,.cta-quote .ico{width:1.25em;height:1.25em}
+  .cta-kakao{background:var(--kakao);color:#191919;padding:14px 18px;font-size:1.12rem;flex-direction:column;gap:4px}
+  .cta-kakao:hover{background:var(--kakao-dark)}
+  .cta-kakao .row{display:flex;align-items:center;gap:9px}
+  .cta-kakao .note{font-size:.78rem;font-weight:700;color:rgba(25,25,25,.62)}
+  .cta-quote{background:var(--blue);color:#fff;padding:18px 18px;font-size:1.12rem;box-shadow:var(--shadow-blue)}
+  .cta-quote:hover{background:var(--blue-dark)}
+
+  /* 3단계 */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:26px 0 8px}
+  .step{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 12px;box-shadow:var(--shadow-sm);text-align:center}
+  .step .n{width:26px;height:26px;border-radius:999px;background:var(--yellow);color:var(--ink);
+    display:grid;place-items:center;font-weight:900;font-size:.85rem;margin:0 auto 8px}
+  .step b{display:block;font-size:.93rem;line-height:1.35}
+  .step small{display:block;color:var(--ink-3);font-size:.76rem;margin-top:4px;line-height:1.4}
+  @media (max-width:520px){
+    .steps{grid-template-columns:1fr;gap:8px}
+    .step{display:flex;align-items:center;gap:12px;padding:12px 14px;text-align:left}
+    .step .n{margin:0;flex:none}
+  }
+
+  /* 폼 카드 */
+  .card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px 18px;
+    box-shadow:var(--shadow-md);margin-top:22px;scroll-margin-top:16px}
+  @media (min-width:600px){.card{padding:32px 30px}}
+  .card h2{font-size:1.28rem;font-weight:900}
+  .card .lead{color:var(--ink-2);font-size:.92rem;margin-top:6px}
+  .f-group{margin-top:20px}
+  .f-label{display:block;font-weight:800;font-size:.92rem;margin-bottom:8px}
+  .f-label .req{color:var(--danger)}
+  .f-label .opt{color:var(--ink-3);font-weight:600;font-size:.8rem;margin-left:4px}
+  .f-input,.f-select,.f-textarea{width:100%;padding:13px 14px;border-radius:12px;border:1.6px solid var(--line);
+    background:#fff;font-family:inherit;font-size:1rem;font-weight:600;color:var(--ink)}
+  .f-input:focus,.f-select:focus,.f-textarea:focus{outline:none;border-color:var(--blue)}
+  .f-textarea{resize:vertical;min-height:96px;line-height:1.5}
+  .f-select{appearance:none;cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23565B78' stroke-width='2'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+  .f-input.err,.f-select.err,.f-textarea.err{border-color:var(--danger);background:#FFF5F5}
+  .f-msg{display:none;color:var(--danger);font-size:.82rem;font-weight:700;margin-top:6px}
+  .f-msg.show{display:block}
+
+  /* 사진 업로드 */
+  .photo-drop{display:flex;align-items:center;justify-content:center;gap:10px;padding:18px 14px;
+    border:1.8px dashed var(--blue-100);background:var(--blue-050);border-radius:14px;color:var(--blue);
+    font-weight:800;cursor:pointer;text-align:center}
+  .photo-drop:hover{border-color:var(--blue)}
+  .photo-drop input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+  .photo-hint{color:var(--ink-3);font-size:.78rem;margin-top:6px}
+  .thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px;margin-top:10px}
+  .thumb{position:relative;aspect-ratio:1/1;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#f0f0f2}
+  .thumb img{width:100%;height:100%;object-fit:cover}
+  .thumb .rm{position:absolute;top:5px;right:5px;width:24px;height:24px;border-radius:999px;background:rgba(20,24,58,.78);
+    color:#fff;font-size:15px;line-height:1;display:grid;place-items:center}
+  .thumb .rm:hover{background:var(--danger)}
+
+  /* 상담 종류 세그먼트 */
+  .seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:5px;background:var(--bg);
+    border:1px solid var(--line);border-radius:14px}
+  .seg label{position:relative}
+  .seg input{position:absolute;opacity:0;width:1px;height:1px}
+  .seg span{display:flex;align-items:center;justify-content:center;text-align:center;min-height:44px;padding:8px 6px;
+    border-radius:10px;font-weight:800;font-size:.88rem;color:var(--ink-2);cursor:pointer;user-select:none;line-height:1.25;
+    transition:background .15s,color .15s,box-shadow .15s}
+  .seg input:checked + span{background:#fff;color:var(--blue);box-shadow:var(--shadow-sm)}
+  .seg input:focus-visible + span{outline:2px solid var(--blue);outline-offset:1px}
+  .scope-group.hidden{display:none}
+
+  /* 체크박스 칩 */
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{position:relative}
+  .chip input{position:absolute;opacity:0;width:1px;height:1px}
+  .chip span{display:inline-flex;align-items:center;padding:9px 14px;border-radius:999px;border:1.6px solid var(--line);
+    background:#fff;font-weight:700;font-size:.9rem;color:var(--ink-2);cursor:pointer;user-select:none}
+  .chip input:checked + span{background:var(--blue-050);border-color:var(--blue);color:var(--blue)}
+  .chip input:focus-visible + span{outline:2px solid var(--blue);outline-offset:2px}
+
+  .agree{display:flex;align-items:flex-start;gap:10px;font-size:.88rem;color:var(--ink-2);margin-top:22px;line-height:1.5}
+  .agree input{width:18px;height:18px;margin:2px 0 0;accent-color:var(--blue);flex:none}
+  .agree a{color:var(--blue);font-weight:700;text-decoration:underline}
+  .submit{margin-top:18px;padding:17px;border-radius:14px;font-size:1.08rem;width:100%}
+  .submit[disabled]{opacity:.6;cursor:not-allowed}
+  .form-err{display:none;margin-top:12px;padding:12px 14px;border-radius:12px;background:#FFF5F5;color:var(--danger);
+    font-weight:700;font-size:.9rem}
+  .form-err.show{display:block}
+
+  /* 접수 완료 */
+  .done{display:none;text-align:center;padding:26px 6px 6px}
+  .done.show{display:block}
+  .done .big{font-size:2.4rem}
+  .done h2{margin-top:8px}
+  .done p{color:var(--ink-2);margin-top:8px}
+  .done .cta-tel{margin-top:20px}
+
+  .b-foot{text-align:center;color:var(--ink-3);font-size:.82rem;margin-top:30px;line-height:1.7}
+  .b-foot b{color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<!-- ============ AMBIENT BACKGROUND ============ -->
+<div class="bg-wrap" aria-hidden="true"></div>
+
+<main class="consult-wrap">
+
+  <!-- ============ HERO ============ -->
+  <section class="b-hero">
+    <div class="copy">
+      <div class="b-brand">공간F5 · 네모맨</div>
+      <h1>어떤 공사가 필요할까요?</h1>
+      <p class="sub">욕실 시공부터 점포·상가 철거까지, 사진 한 장으로 편하게 상담하세요.</p>
+    </div>
+  </section>
+
+  <!-- ============ CTA 3종 ============ -->
+  <div class="cta-stack">
+    <a href="tel:01048667734" class="cta cta-tel" id="telBtn">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span>전화 상담</span>
+      <span class="num">010-4866-7734</span>
+    </a>
+    <a href="sms:01048667734" class="cta cta-kakao" id="kakaoBtn">
+      <span class="row">
+        <svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.48 3 2 6.58 2 11c0 2.84 1.86 5.33 4.66 6.75L5.6 21.5c-.08.3.26.53.52.36l4.5-2.98c.45.05.91.08 1.38.08 5.52 0 10-3.58 10-8S17.52 3 12 3z"/></svg>
+        <span id="kakaoLabel">카카오톡 상담 (준비 중)</span>
+      </span>
+      <span class="note" id="kakaoNote">채널 준비 중 · 지금은 문자로 사진 보내주세요</span>
+    </a>
+    <a href="#consultForm" class="cta cta-quote" id="quoteBtn">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+      <span>간편 견적</span>
+    </a>
+  </div>
+
+  <!-- ============ 3단계 ============ -->
+  <div class="steps">
+    <div class="step"><div class="n">1</div><div><b>현장 사진 전송</b><small>전체/부분 사진 모두 OK</small></div></div>
+    <div class="step"><div class="n">2</div><div><b>지역 알려주세요</b><small>서울·경기 전역</small></div></div>
+    <div class="step"><div class="n">3</div><div><b>원하는 공사 내용</b><small>예산, 스타일 등 자유롭게</small></div></div>
+  </div>
+
+  <!-- ============ 간편 견적 폼 ============ -->
+  <section class="card" id="formCard">
+    <form id="consultForm" novalidate>
+      <h2>간편 견적 요청</h2>
+      <p class="lead">사진 · 지역 · 원하는 내용만 남겨주시면 확인 후 연락드립니다.</p>
+
+      <!-- 상담 종류 -->
+      <div class="f-group">
+        <span class="f-label">상담 종류 <span class="req">*</span></span>
+        <div class="seg" role="radiogroup" aria-label="상담 종류">
+          <label><input type="radio" name="kind" value="bath" checked><span>욕실·화장실<br>시공</span></label>
+          <label><input type="radio" name="kind" value="demo"><span>점포·상가<br>철거</span></label>
+          <label><input type="radio" name="kind" value="etc"><span>기타<br>인테리어</span></label>
+        </div>
+      </div>
+
+      <!-- 사진 첨부 -->
+      <div class="f-group">
+        <label class="f-label">현장 사진 <span class="opt">최대 5장</span></label>
+        <label class="photo-drop" for="photoInput">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          사진 찍기 / 앨범에서 선택
+          <input type="file" id="photoInput" accept="image/*" multiple capture="environment">
+        </label>
+        <div class="photo-hint">사진은 자동으로 용량을 줄여 전송됩니다. 전체 모습과 문제 부위를 함께 찍어주시면 좋아요.</div>
+        <div class="thumbs" id="thumbs"></div>
+        <div class="f-msg" id="photoMsg"></div>
+      </div>
+
+      <!-- 지역 -->
+      <div class="f-group">
+        <label class="f-label" for="region">지역 <span class="req">*</span></label>
+        <select class="f-select" id="region" name="region" required>
+          <option value="">지역을 선택하세요</option>
+          <optgroup label="서울">
+            <option>서울 강남구</option><option>서울 강동구</option><option>서울 강북구</option><option>서울 강서구</option>
+            <option>서울 관악구</option><option>서울 광진구</option><option>서울 구로구</option><option>서울 금천구</option>
+            <option>서울 노원구</option><option>서울 도봉구</option><option>서울 동대문구</option><option>서울 동작구</option>
+            <option>서울 마포구</option><option>서울 서대문구</option><option>서울 서초구</option><option>서울 성동구</option>
+            <option>서울 성북구</option><option>서울 송파구</option><option>서울 양천구</option><option>서울 영등포구</option>
+            <option>서울 용산구</option><option>서울 은평구</option><option>서울 종로구</option><option>서울 중구</option>
+            <option>서울 중랑구</option>
+          </optgroup>
+          <optgroup label="경기">
+            <option>경기 수원시</option><option>경기 성남시</option><option>경기 고양시</option><option>경기 용인시</option>
+            <option>경기 부천시</option><option>경기 안양시</option><option>경기 안산시</option><option>경기 남양주시</option>
+            <option>경기 화성시</option><option>경기 평택시</option><option>경기 의정부시</option><option>경기 시흥시</option>
+            <option>경기 파주시</option><option>경기 김포시</option><option>경기 광명시</option><option>경기 광주시</option>
+            <option>경기 군포시</option><option>경기 하남시</option><option>경기 오산시</option><option>경기 이천시</option>
+            <option>경기 안성시</option><option>경기 구리시</option><option>경기 의왕시</option><option>경기 양주시</option>
+            <option>경기 포천시</option><option>경기 여주시</option><option>경기 동두천시</option><option>경기 과천시</option>
+            <option>기타 경기</option>
+          </optgroup>
+          <option>기타</option>
+        </select>
+        <div class="f-msg" id="regionMsg">지역을 선택해주세요.</div>
+      </div>
+
+      <!-- 공사 희망 범위 (상담 종류에 따라 표시) -->
+      <div class="f-group scope-group" data-kind="bath">
+        <span class="f-label">공사 희망 범위 <span class="opt">복수 선택 가능</span></span>
+        <div class="chips">
+          <label class="chip"><input type="checkbox" name="scope" value="전체 리모델링"><span>전체 리모델링</span></label>
+          <label class="chip"><input type="checkbox" name="scope" value="타일만"><span>타일만</span></label>
+          <label class="chip"><input type="checkbox" name="scope" value="방수·누수"><span>방수·누수</span></label>
+          <label class="chip"><input type="checkbox" name="scope" value="변기·세면대 교체"><span>변기·세면대 교체</span></label>
+          <label class="chip"><input type="checkbox" name="scope" value="욕조→샤워부스"><span>욕조→샤워부스</span></label>
+          <label class="chip"><input type="checkbox" name="scope" value="잘 모르겠어요"><span>잘 모르겠어요 (사진 보고 추천)</span></label>
+        </div>
+      </div>
+      <div class="f-group scope-group hidden" data-kind="demo">
+        <span class="f-label">철거 희망 범위 <span class="opt">복수 선택 가능</span></span>
+        <div class="chips">
+          <label class="chip"><input type="checkbox" name="scope" value="전체 철거"><span>전체 철거</span></label>
+          <label class="chip"><input type="checkbox" name="scope" value="부분 철거"><span>부분 철거</span></label>
+          <label class="chip"><input type="checkbox" name="scope" value="원상복구"><span>원상복구</span></label>
+          <label class="chip"><input type="checkbox" name="scope" value="폐기물 처리만"><span>폐기물 처리만</span></label>
+          <label class="chip"><input type="checkbox" name="scope" value="정부지원(폐업) 상담"><span>정부지원(폐업) 상담</span></label>
+          <label class="chip"><input type="checkbox" name="scope" value="잘 모르겠어요"><span>잘 모르겠어요 (사진 보고 추천)</span></label>
+        </div>
+      </div>
+
+      <!-- 이름 / 연락처 -->
+      <div class="f-group">
+        <label class="f-label" for="name">이름 <span class="opt">선택</span></label>
+        <input class="f-input" type="text" id="name" name="name" placeholder="홍길동" autocomplete="name" maxlength="40">
+      </div>
+      <div class="f-group">
+        <label class="f-label" for="phone">연락처 <span class="req">*</span></label>
+        <input class="f-input" type="tel" id="phone" name="phone" placeholder="010-1234-5678" autocomplete="tel" inputmode="tel" required>
+        <div class="f-msg" id="phoneMsg">연락처를 정확히 입력해주세요. (예: 010-1234-5678)</div>
+      </div>
+
+      <!-- 메모 -->
+      <div class="f-group">
+        <label class="f-label" for="memo">메모 <span class="opt">예산 · 스타일 등</span></label>
+        <textarea class="f-textarea" id="memo" name="memo" placeholder="예) 예산 300만원 이내, 밝은 화이트 톤으로. / 15평 카페 원상복구, 이달 말까지 필요해요." maxlength="1000"></textarea>
+      </div>
+
+      <label class="agree">
+        <input type="checkbox" id="agree" required>
+        <span>개인정보 수집·이용에 동의합니다. 상담 목적으로만 사용되며 상담 종료 후 파기됩니다. <a href="page/terms.html" target="_blank" rel="noopener">자세히 보기</a></span>
+      </label>
+      <div class="f-msg" id="agreeMsg">개인정보 수집·이용에 동의해주세요.</div>
+
+      <input type="hidden" name="source" id="source">
+
+      <button type="submit" class="btn btn-primary submit" id="submitBtn">견적 요청 보내기</button>
+      <div class="form-err" id="formErr"></div>
+    </form>
+
+    <!-- 접수 완료 -->
+    <div class="done" id="done">
+      <div class="big">✅</div>
+      <h2>접수되었습니다. 곧 연락드릴게요 😊</h2>
+      <p>급하시면 지금 바로 전화 주셔도 됩니다.</p>
+      <a href="tel:01048667734" class="cta cta-tel">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>전화 상담</span><span class="num">010-4866-7734</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="b-foot">
+    <b>공간F5 · 네모맨</b> | 서울·경기 화장실 시공 / 인테리어 / 점포·상가 철거
+  </footer>
+</main>
+
+<script>
+  // 카카오톡 채널 URL — 채널이 준비되면 여기에 주소를 넣으세요 (예: 'https://pf.kakao.com/_xxxxx')
+  const KAKAO_URL = '';
+
+  const MAX_PHOTOS = 5;
+  const MAX_SIDE = 1600;     // 리사이즈 최대 변 길이(px)
+  const JPEG_QUALITY = 0.82;
+
+  const $ = id => document.getElementById(id);
+
+  /* ---------- 카카오 버튼 ---------- */
+  if (KAKAO_URL) {
+    const b = $('kakaoBtn');
+    b.href = KAKAO_URL;
+    b.target = '_blank';
+    b.rel = 'noopener';
+    $('kakaoLabel').textContent = '카카오톡 상담';
+    $('kakaoNote').remove();
+  }
+
+  /* ---------- 간편 견적 → 폼으로 스크롤 ---------- */
+  $('quoteBtn').addEventListener('click', e => {
+    e.preventDefault();
+    $('formCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(() => $('region').focus({ preventScroll: true }), 450);
+  });
+
+  /* ---------- 상담 종류: ?type=bath|demo 로 사전 선택, 범위 칩 전환 ---------- */
+  const kindInputs = Array.from(document.querySelectorAll('input[name="kind"]'));
+  function syncKind() {
+    const kind = (kindInputs.find(r => r.checked) || {}).value || 'bath';
+    document.querySelectorAll('.scope-group').forEach(g => {
+      const on = g.dataset.kind === kind;
+      g.classList.toggle('hidden', !on);
+      if (!on) g.querySelectorAll('input[name="scope"]').forEach(c => { c.checked = false; });
+    });
+  }
+  (function presetKind(){
+    const t = new URLSearchParams(location.search).get('type');
+    const r = kindInputs.find(x => x.value === t);
+    if (r) r.checked = true;
+  })();
+  kindInputs.forEach(r => r.addEventListener('change', syncKind));
+  syncKind();
+
+  /* ---------- 유입 경로 ---------- */
+  (function setSource(){
+    const q = new URLSearchParams(location.search);
+    let src = q.get('utm_source') || q.get('src') || '';
+    if (!src && document.referrer) {
+      try { src = new URL(document.referrer).hostname; } catch {}
+    }
+    $('source').value = src.slice(0, 200);
+  })();
+
+  /* ---------- 사진 선택 · 미리보기 · 리사이즈 ---------- */
+  let photos = []; // { file: File|Blob, name, url }
+
+  $('photoInput').addEventListener('change', async e => {
+    const input = e.target;
+    const files = Array.from(input.files || []);
+    input.value = ''; // 같은 파일 재선택 허용
+    const msg = $('photoMsg');
+    msg.classList.remove('show');
+
+    if (photos.length + files.length > MAX_PHOTOS) {
+      msg.textContent = `사진은 최대 ${MAX_PHOTOS}장까지 첨부할 수 있어요.`;
+      msg.classList.add('show');
+    }
+    for (const f of files.slice(0, MAX_PHOTOS - photos.length)) {
+      if (!f.type.startsWith('image/') && !/\.(heic|heif)$/i.test(f.name)) continue;
+      const blob = await downscale(f);
+      photos.push({ file: blob, name: blob === f ? f.name : f.name.replace(/\.[^.]+$/, '') + '.jpg', url: URL.createObjectURL(blob) });
+    }
+    renderThumbs();
+  });
+
+  // canvas로 긴 변 MAX_SIDE 이하 JPEG로 축소. 디코딩 실패(HEIC 등)면 원본 그대로.
+  async function downscale(file) {
+    try {
+      const bmp = await loadImage(file);
+      const w = bmp.width, h = bmp.height;
+      const scale = Math.min(1, MAX_SIDE / Math.max(w, h));
+      const cw = Math.round(w * scale), ch = Math.round(h * scale);
+      const canvas = document.createElement('canvas');
+      canvas.width = cw; canvas.height = ch;
+      canvas.getContext('2d').drawImage(bmp, 0, 0, cw, ch);
+      if (bmp.close) bmp.close();
+      const blob = await new Promise(res => canvas.toBlob(res, 'image/jpeg', JPEG_QUALITY));
+      if (!blob) return file;
+      // 축소 결과가 더 크면 원본 유지
+      return blob.size < file.size || scale < 1 ? blob : file;
+    } catch {
+      return file;
+    }
+  }
+
+  async function loadImage(file) {
+    if (window.createImageBitmap) {
+      try { return await createImageBitmap(file, { imageOrientation: 'from-image' }); } catch {}
+    }
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
+      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('decode')); };
+      img.src = url;
+    });
+  }
+
+  function renderThumbs() {
+    $('thumbs').innerHTML = photos.map((p, i) => `
+      <div class="thumb">
+        <img src="${p.url}" alt="첨부 사진 ${i + 1}">
+        <button type="button" class="rm" data-i="${i}" aria-label="사진 삭제">×</button>
+      </div>`).join('');
+  }
+  $('thumbs').addEventListener('click', e => {
+    const btn = e.target.closest('.rm');
+    if (!btn) return;
+    const i = Number(btn.dataset.i);
+    URL.revokeObjectURL(photos[i].url);
+    photos.splice(i, 1);
+    renderThumbs();
+  });
+
+  /* ---------- 검증 · 전송 ---------- */
+  const PHONE_RE = /^01[0-9]-?\d{3,4}-?\d{4}$/;
+  function setErr(el, msgEl, on) {
+    el.classList.toggle('err', on);
+    msgEl.classList.toggle('show', on);
+  }
+
+  $('consultForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const formErr = $('formErr');
+    formErr.classList.remove('show');
+
+    const kind = (kindInputs.find(r => r.checked) || {}).value || 'bath';
+    const region = $('region').value;
+    const phone = $('phone').value.replace(/\s/g, '');
+    const memo = $('memo').value.trim();
+    // 현재 보이는 범위 그룹의 체크만 수집 (기타 인테리어는 범위 없음)
+    const scope = Array.from(document.querySelectorAll('.scope-group:not(.hidden) input[name="scope"]:checked')).map(c => c.value);
+
+    const badRegion = !region;
+    const badPhone = !PHONE_RE.test(phone);
+    const badAgree = !$('agree').checked;
+    setErr($('region'), $('regionMsg'), badRegion);
+    setErr($('phone'), $('phoneMsg'), badPhone);
+    $('agreeMsg').classList.toggle('show', badAgree);
+    if (badRegion || badPhone || badAgree) {
+      (badRegion ? $('region') : badPhone ? $('phone') : $('agree')).focus();
+      return;
+    }
+    if (!photos.length && !scope.length && !memo) {
+      formErr.textContent = '사진, 공사 범위, 메모 중 하나는 알려주세요.';
+      formErr.classList.add('show');
+      return;
+    }
+
+    const fd = new FormData();
+    fd.append('kind', kind);
+    fd.append('name', $('name').value.trim());
+    fd.append('phone', phone);
+    fd.append('region', region);
+    fd.append('memo', memo);
+    fd.append('source', $('source').value);
+    scope.forEach(s => fd.append('scope', s));
+    photos.forEach(p => fd.append('photos', p.file, p.name));
+
+    const btn = $('submitBtn');
+    btn.disabled = true;
+    btn.textContent = '전송 중…';
+    try {
+      const res = await fetch('/api/consult', { method: 'POST', body: fd });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok || !out.ok) throw new Error(out.error || '전송에 실패했습니다. 잠시 후 다시 시도해주세요.');
+      $('consultForm').style.display = 'none';
+      $('done').classList.add('show');
+      $('formCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch (err) {
+      formErr.textContent = err.message || '전송에 실패했습니다. 전화로 문의해주세요.';
+      formErr.classList.add('show');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '견적 요청 보내기';
+    }
+  });
+</script>
+</body>
+</html>

@@ -47,7 +47,7 @@ Pages → nemoman → **Settings → Variables and secrets → Add** (Type: **Se
 |---|---|
 | `SOLAPI_API_KEY` | 솔라피 API Key |
 | `SOLAPI_API_SECRET` | 솔라피 API Secret |
-| `OWNER_PHONE` | 알림 받을 번호 (예: 01020106784) |
+| `OWNER_PHONE` | 알림 받을 번호 (예: 01048667734) |
 | `SENDER_PHONE` | 솔라피에 등록한 발신번호 |
 
 ### 2-3. 재배포

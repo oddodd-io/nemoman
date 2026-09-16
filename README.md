@@ -9,6 +9,8 @@
 
 ## 구조
 - `index.html` · `styles.css` — 메인 페이지
+- `estimate.html` — 철거 간편견적
+- `consult.html` — 상담 신청 (욕실·철거·기타 / 사진 첨부 · `?type=bath|demo` 로 종류 사전선택) → 백엔드는 `BACKEND.md`
 - `assets/` — 네모맨 마스코트 이미지
 - `docs/` — 기획서 · 사이트맵 · 작업계획 · 디자인브리프
 

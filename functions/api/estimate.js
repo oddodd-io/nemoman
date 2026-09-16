@@ -12,6 +12,8 @@
      TURNSTILE_SECRET : (선택) Cloudflare Turnstile 시크릿
    ========================================================= */
 
+import { sendSolapiSms, verifyTurnstile } from '../_lib/solapi.js';
+
 const TYPE = { store: '상가/점포', office: '사무실', factory: '공장', house: '주택' };
 const CAT = { food: '음식점', retail: '소매점', service: '서비스업', office: '사무실', other: '기타' };
 const SCOPE = { partial: '부분 철거', full: '전체 철거' };
@@ -97,48 +99,4 @@ export async function onRequestPost(context) {
 export async function onRequest(context) {
   if (context.request.method === 'POST') return onRequestPost(context);
   return json({ ok: false, error: 'Method Not Allowed' }, 405);
-}
-
-/* ---------- SOLAPI (HMAC-SHA256 인증) ---------- */
-async function sendSolapiSms(env, text) {
-  const enc = new TextEncoder();
-  const date = new Date().toISOString();
-  const salt = crypto.randomUUID().replace(/-/g, '');
-  const key = await crypto.subtle.importKey(
-    'raw', enc.encode(env.SOLAPI_API_SECRET),
-    { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
-  );
-  const sigBuf = await crypto.subtle.sign('HMAC', key, enc.encode(date + salt));
-  const signature = [...new Uint8Array(sigBuf)].map(b => b.toString(16).padStart(2, '0')).join('');
-
-  const res = await fetch('https://api.solapi.com/messages/v4/send', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `HMAC-SHA256 apiKey=${env.SOLAPI_API_KEY}, date=${date}, salt=${salt}, signature=${signature}`,
-    },
-    body: JSON.stringify({
-      message: {
-        to: env.OWNER_PHONE.replace(/\D/g, ''),
-        from: env.SENDER_PHONE.replace(/\D/g, ''),
-        text,
-      },
-    }),
-  });
-  return res.ok;
-}
-
-/* ---------- Turnstile 검증 (선택) ---------- */
-async function verifyTurnstile(secret, token, request) {
-  if (!token) return false;
-  const form = new FormData();
-  form.append('secret', secret);
-  form.append('response', token);
-  const ip = request.headers.get('CF-Connecting-IP');
-  if (ip) form.append('remoteip', ip);
-  const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-    method: 'POST', body: form,
-  });
-  const out = await res.json().catch(() => ({}));
-  return !!out.success;
 }
